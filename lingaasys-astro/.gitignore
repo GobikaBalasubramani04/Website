@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Astro build output and generated files
+dist/
+.astro/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# Local tooling and OS files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Test and coverage output
+coverage/

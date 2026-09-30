@@ -1,0 +1,12 @@
+---
+import Logo from './Logo.astro';
+import SocialLinks from './SocialLinks.astro';
+import { NAV, CONFIG } from '../data/site';
+---
+<footer><div class="wrap"><div class="fg">
+  <div><a class="logo" href="/"><Logo decorative />Lingaasys</a><p style="margin-top:20px">Creating systems for humanity through thoughtful technology and engineering.</p></div>
+  <div><h4>Navigate</h4><ul>{NAV.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul></div>
+  <div><h4>Contact</h4>
+    {CONFIG.email ? <a class="mailf" href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a> : <span class="mailf">[company email — to be added]</span>}
+    <SocialLinks class="fsoc" /></div>
+</div><div class="copy">© {new Date().getFullYear()} Lingaasys. All rights reserved.</div></div></footer>

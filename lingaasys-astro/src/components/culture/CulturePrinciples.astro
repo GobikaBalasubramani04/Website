@@ -1,0 +1,8 @@
+---
+const principles = [
+  ['SOONER','The way we build','We move ideas toward useful outcomes with focused engineering, early feedback and continuous improvement.'],
+  ['SAFER','The way we work','We value reliable engineering, clear communication and thoughtful collaboration around the systems we build.'],
+  ['HAPPIER','The way we grow','We create space for learning, ownership, teamwork and the confidence to take on new challenges.']
+];
+---
+<section class="principles dark"><div class="wrap">{principles.map(([title,sub,text],i) => <article class="principle rv" tabindex="0"><div><span>0{i+1}</span><h2>{title}</h2></div><div><h3>{sub}</h3><p>{text}</p></div></article>)}</div></section>

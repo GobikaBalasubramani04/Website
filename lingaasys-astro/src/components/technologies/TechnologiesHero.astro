@@ -1,0 +1,138 @@
+<section class="page-hero tech-hero">
+  <div class="wrap page-hero-grid">
+    <div class="rv">
+      <span class="eyebrow">Technology</span>
+
+      <h1>
+        Technology That Builds
+        <span>Possibility</span>
+      </h1>
+
+      <p>
+        We combine modern engineering, intelligent systems, and thoughtful
+        technology to build solutions that create meaningful impact.
+      </p>
+    </div>
+
+    <div class="code-window rv">
+      <div class="code-header">
+        <span></span>
+        <span></span>
+        <span></span>
+        <small>system.ts</small>
+      </div>
+
+      <pre><code><span class="keyword">interface</span> System &#123;
+  intelligence: <span class="type">boolean</span>;
+  scalable: <span class="type">boolean</span>;
+  humanCentered: <span class="type">boolean</span>;
+&#125;
+
+<span class="keyword">const</span> build = (system: System) =&gt; &#123;
+  <span class="keyword">return</span>
+    <span class="string">"Technology with purpose"</span>;
+&#125;;</code></pre>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tech-hero {
+    padding: 7rem 0 5rem;
+  }
+
+  .page-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .eyebrow {
+    color: #f26b21;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 1rem 0;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 0.95;
+  }
+
+  h1 span {
+    color: #f26b21;
+    display: block;
+  }
+
+  p {
+    max-width: 600px;
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  .code-window {
+    overflow: hidden;
+    border: 1px solid #333;
+    border-radius: 12px;
+    background: #111;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #292929;
+  }
+
+  .code-header > span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #666;
+  }
+
+  .code-header small {
+    margin-left: auto;
+    color: #888;
+  }
+
+  pre {
+    margin: 0;
+    padding: 2rem;
+    overflow-x: auto;
+    color: #ddd;
+    font-family: monospace;
+    line-height: 1.8;
+  }
+
+  .keyword {
+    color: #f26b21;
+  }
+
+  .type {
+    color: #aaa;
+  }
+
+  .string {
+    color: #ddd;
+  }
+
+  @media (max-width: 800px) {
+    .page-hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tech-hero {
+      padding: 5rem 0 3rem;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 12vw, 4rem);
+    }
+  }
+</style>

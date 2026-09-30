@@ -1,0 +1,386 @@
+<section id="career-paths" class="career-paths">
+  <div class="paths-wrap">
+
+    <div class="path-intro">
+      <span>OPPORTUNITIES</span>
+
+      <h2>
+        Choose how<br />
+        you want to grow.
+      </h2>
+
+      <p>
+        Whether you are beginning your journey or ready to build your career,
+        find an opportunity that fits your next step.
+      </p>
+    </div>
+
+    <div class="path-grid">
+
+      <!-- INTERNSHIP CARD -->
+      <article class="path-card">
+        <span class="card-number">01</span>
+
+        <div class="card-content">
+
+          <!-- MAIN HEADING -->
+          <span class="card-label">INTERNSHIP</span>
+
+          <!-- QUOTE -->
+          <h3>
+            Learn.<br />
+            Build.<br />
+            Grow.
+          </h3>
+
+          <p>
+            Start your journey by working on real projects, learning from
+            experienced teams and building practical technology skills.
+          </p>
+
+          <a
+            href="/careers/internship"
+            class="explore-btn"
+          >
+            <span>Explore Opportunities</span>
+            <strong>↗</strong>
+          </a>
+
+        </div>
+      </article>
+
+
+      <!-- FULL TIME CARD -->
+      <article class="path-card">
+        <span class="card-number">02</span>
+
+        <div class="card-content">
+
+          <!-- MAIN HEADING -->
+          <span class="card-label">FULL TIME</span>
+
+          <!-- QUOTE -->
+          <h3>
+            Build.<br />
+            Grow.<br />
+            Lead.
+          </h3>
+
+          <p>
+            Build meaningful systems, collaborate with talented people and
+            grow through real engineering challenges.
+          </p>
+
+          <a
+            href="/careers/full-time"
+            class="explore-btn"
+          >
+            <span>Explore Opportunities</span>
+            <strong>↗</strong>
+          </a>
+
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<style>
+  /* ================================
+     CAREER PATHS SECTION
+  ================================= */
+
+  .career-paths {
+    padding: 120px 7vw;
+    background: #f5f5f3;
+  }
+
+  .paths-wrap {
+    width: min(1280px, 100%);
+    margin: 0 auto;
+  }
+
+
+  /* ================================
+     SECTION INTRO
+  ================================= */
+
+  .path-intro {
+    max-width: 720px;
+    margin-bottom: 65px;
+  }
+
+  .path-intro > span {
+    color: #f26a21;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+  }
+
+  .path-intro h2 {
+    margin: 16px 0 20px;
+    color: #171717;
+    font-size: clamp(45px, 5vw, 72px);
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+  }
+
+  .path-intro p {
+    max-width: 620px;
+    margin: 0;
+    color: #707070;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+
+  /* ================================
+     CARD GRID
+  ================================= */
+
+  .path-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px;
+  }
+
+
+  /* ================================
+     CARD
+  ================================= */
+
+  .path-card {
+    position: relative;
+
+    min-height: 560px;
+    padding: 36px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+    border: 1px solid #dededb;
+
+    transition:
+      transform 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  .path-card:hover {
+    transform: translateY(-7px);
+
+    border-color: #f26a21;
+
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.08);
+  }
+
+
+  /* ================================
+     CARD NUMBER
+  ================================= */
+
+  .card-number {
+    color: #999999;
+
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+
+  /* ================================
+     CARD CONTENT
+  ================================= */
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    margin-top: 65px;
+  }
+
+
+  /* ================================
+     MAIN HEADING
+     INTERNSHIP / FULL TIME
+  ================================= */
+
+  .card-label {
+    color: #171717;
+
+    font-size: clamp(48px, 5vw, 72px);
+
+    line-height: 0.9;
+
+    font-weight: 750;
+
+    letter-spacing: -0.055em;
+  }
+
+
+  /* ================================
+     QUOTE
+     Learn. Build. Grow.
+     Build. Grow. Lead.
+  ================================= */
+
+  .card-content h3 {
+    margin: 18px 0 25px;
+
+    color: #f26a21;
+
+    font-size: clamp(22px, 2.2vw, 30px);
+
+    line-height: 1.05;
+
+    font-weight: 650;
+
+    letter-spacing: -0.03em;
+  }
+
+
+  /* ================================
+     DESCRIPTION
+  ================================= */
+
+  .card-content p {
+    max-width: 500px;
+
+    margin: 0;
+
+    color: #707070;
+
+    font-size: 14px;
+
+    line-height: 1.75;
+  }
+
+
+  /* ================================
+     EXPLORE BUTTON
+  ================================= */
+
+  .explore-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    width: fit-content;
+    min-width: 230px;
+
+    margin-top: auto;
+
+    padding: 14px 18px;
+
+    border: 1px solid #d2d2d2;
+
+    background: #ffffff;
+
+    color: #171717;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 750;
+
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .explore-btn strong {
+    font-size: 17px;
+
+    font-weight: 400;
+
+    transition:
+      transform 0.25s ease;
+  }
+
+  .explore-btn:hover {
+    background: #f26a21;
+
+    border-color: #f26a21;
+
+    color: #ffffff;
+  }
+
+  .explore-btn:hover strong {
+    transform: translate(4px, -3px);
+  }
+
+
+  /* ================================
+     TABLET
+  ================================= */
+
+  @media (max-width: 850px) {
+
+    .career-paths {
+      padding: 90px 24px;
+    }
+
+    .path-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .path-card {
+      min-height: 500px;
+    }
+
+    .card-label {
+      font-size: clamp(48px, 8vw, 65px);
+    }
+  }
+
+
+  /* ================================
+     MOBILE
+  ================================= */
+
+  @media (max-width: 500px) {
+
+    .career-paths {
+      padding: 75px 20px;
+    }
+
+    .path-intro {
+      margin-bottom: 45px;
+    }
+
+    .path-card {
+      min-height: 470px;
+
+      padding: 28px;
+    }
+
+    .card-content {
+      margin-top: 50px;
+    }
+
+    .card-label {
+      font-size: 42px;
+    }
+
+    .card-content h3 {
+      font-size: 22px;
+
+      margin-top: 15px;
+      margin-bottom: 22px;
+    }
+
+    .explore-btn {
+      min-width: 210px;
+    }
+  }
+</style>

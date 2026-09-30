@@ -1,0 +1,46 @@
+<section class="ch-hero">
+  <div class="ch-grid">
+    <div class="ch-content">
+      
+      <h1 class="ch-title">Build Your <span>Future</span> With Us.</h1>
+      <p>Build meaningful systems, learn through real projects, and grow with people who care about what they create.</p>
+    </div>
+    <div class="ch-visual" aria-hidden="true">
+      <div class="ch-ring r1"></div><div class="ch-ring r2"></div><div class="ch-ring r3"></div>
+     
+      <div class="ch-dot d1"></div><div class="ch-dot d2"></div><div class="ch-dot d3"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ch-hero{position:relative;isolation:isolate;z-index:1;background:#171717;color:#fff;overflow:hidden;
+    padding:calc(96px + 48px) 0 96px;min-height:680px;display:flex;align-items:center}
+  .ch-grid{width:min(1280px,100% - 48px);margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:70px}
+  .ch-content{position:relative;z-index:2}
+  .ch-eyebrow{display:inline-block;color:#f26a21;font-size:11px;font-weight:800;letter-spacing:.2em}
+  .ch-title{max-width:760px;margin:20px 0 30px;font-size:clamp(48px,7vw,100px);line-height:.95;letter-spacing:-.05em;font-weight:750;color:#fff}
+  .ch-title span{color:#f26a21}
+  .ch-content p{max-width:570px;margin:0;color:#bcbcbc;font-size:16px;line-height:1.8}
+  .ch-content>*{animation:ch-rise .7s ease backwards}
+  .ch-content>*:nth-child(2){animation-delay:.1s}.ch-content>*:nth-child(3){animation-delay:.2s}
+  .ch-visual{position:relative;width:min(500px,100%);aspect-ratio:1;margin-left:auto}
+  .ch-ring{position:absolute;left:50%;top:50%;border:1px solid rgba(255,255,255,.14);border-radius:50%;translate:-50% -50%}
+  .r1{width:42%;height:42%;animation:ch-spin 12s linear infinite}
+  .r2{width:68%;height:68%;animation:ch-spin 18s linear infinite reverse}
+  .r3{width:92%;height:92%;border-color:rgba(242,106,33,.25);animation:ch-spin 25s linear infinite}
+  .ch-core{position:absolute;left:50%;top:50%;width:125px;height:125px;translate:-50% -50%;display:grid;place-items:center;
+    border:1px solid rgba(242,106,33,.6);border-radius:50%;background:rgba(242,106,33,.08);box-shadow:0 0 50px rgba(242,106,33,.12)}
+  .ch-core span{font-size:10px;font-weight:800;letter-spacing:.14em}
+  .ch-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:#f26a21;box-shadow:0 0 18px rgba(242,106,33,.7)}
+  .d1{top:19%;left:48%}.d2{right:12%;bottom:30%}.d3{left:13%;bottom:25%}
+  @keyframes ch-spin{to{rotate:360deg}}
+  @keyframes ch-rise{from{opacity:0;transform:translateY(16px)}}
+  @media (max-width:850px){
+    .ch-hero{min-height:auto;padding:128px 0 64px}
+    .ch-grid{grid-template-columns:1fr;gap:32px}
+    .ch-visual{width:min(400px,90%);margin:0 auto}
+  }
+  @media (max-width:500px){.ch-core{width:100px;height:100px}.ch-core span{font-size:8px}}
+  @media (prefers-reduced-motion:reduce){.ch-ring,.ch-content>*{animation:none}}
+</style>

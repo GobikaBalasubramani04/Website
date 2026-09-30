@@ -1,0 +1,11 @@
+---
+const items = [
+  ['01','Software Systems','Reliable applications that connect people, workflows and data.'],
+  ['02','Digital Solutions','Purposeful digital experiences shaped around real user needs.'],
+  ['03','Intelligent Applications','Products that bring useful intelligence into everyday workflows.'],
+  ['04','Automation','Systems that reduce repetitive work and connect process steps.'],
+  ['05','AI / ML','Intelligence layers designed around practical system outcomes.'],
+  ['06','Data-driven Systems','Structured data flows that help teams understand and act.']
+];
+---
+<section class="page-section build"><div class="wrap"><div class="section-intro rv"><span class="eyebrow">What We Build</span><h2>From software to intelligent systems.</h2></div><div class="build-grid">{items.map(([num,title,text]) => <article class="build-item rv"><span>{num}</span><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>

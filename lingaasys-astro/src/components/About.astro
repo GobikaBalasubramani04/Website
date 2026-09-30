@@ -1,0 +1,312 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+  cta?: boolean;
+}
+
+const { cta = true } = Astro.props;
+---
+
+<section id="about">
+  <div class="wrap about">
+
+    <div class="rv about-content">
+      <SectionHeading
+        eyebrow="About Us"
+        title="Technology built around people."
+        lead="Lingaasys is a technology company that designs and engineers software and systems. We work from the belief that good systems should make work clearer, safer and more human for the people who use them."
+      />
+
+      {cta && (
+        <div class="sec-cta">
+          <a class="btn k" href="/about">Discover Lingaasys</a>
+        </div>
+      )}
+    </div>
+
+    <!-- Meaningful technology visual -->
+    <div class="about-visual rv" aria-hidden="true">
+
+      <div class="visual-line line-one"></div>
+      <div class="visual-line line-two"></div>
+      <div class="visual-line line-three"></div>
+
+      <div class="about-node node-people">
+        <span class="node-icon">01</span>
+        <strong>People</strong>
+        <small>Who we build for</small>
+      </div>
+
+      <div class="about-node node-systems">
+        <span class="node-icon">02</span>
+        <strong>Systems</strong>
+        <small>How ideas become solutions</small>
+      </div>
+
+      <div class="about-node node-technology">
+        <span class="node-icon">03</span>
+        <strong>Technology</strong>
+        <small>What brings it to life</small>
+      </div>
+
+      <div class="about-core">
+        <span></span>
+        <b>Purpose</b>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+  #about {
+    overflow: hidden;
+  }
+
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    align-items: center;
+    gap: 80px;
+    min-height: 560px;
+  }
+
+  .about-content {
+    max-width: 680px;
+  }
+
+  /* -----------------------------
+     Visual
+  ----------------------------- */
+
+  .about-visual {
+    position: relative;
+    min-height: 430px;
+    width: 100%;
+    max-width: 520px;
+    margin-inline: auto;
+  }
+
+  .about-node {
+    position: absolute;
+    width: 170px;
+    min-height: 92px;
+    padding: 18px 20px;
+    background: #fff;
+    border: 1px solid #dedede;
+    border-radius: 16px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.07);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  .about-node:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.11);
+    border-color: #f26b21;
+  }
+
+  .node-icon {
+    font-size: 11px;
+    font-weight: 700;
+    color: #f26b21;
+    letter-spacing: 0.12em;
+    margin-bottom: 7px;
+  }
+
+  .about-node strong {
+    font-size: 18px;
+    line-height: 1.2;
+    color: #222;
+  }
+
+  .about-node small {
+    margin-top: 5px;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #777;
+  }
+
+  .node-people {
+    top: 15px;
+    left: 0;
+  }
+
+  .node-systems {
+    top: 155px;
+    right: 0;
+  }
+
+  .node-technology {
+    bottom: 15px;
+    left: 35px;
+  }
+
+  /* -----------------------------
+     Purpose center
+  ----------------------------- */
+
+  .about-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: #222;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.16);
+  }
+
+  .about-core b {
+    font-size: 15px;
+    letter-spacing: 0.02em;
+  }
+
+  .about-core span {
+    position: absolute;
+    width: 142px;
+    height: 142px;
+    border: 1px solid #f26b21;
+    border-radius: 50%;
+    opacity: 0.55;
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  /* -----------------------------
+     Connecting lines
+  ----------------------------- */
+
+  .visual-line {
+    position: absolute;
+    height: 1px;
+    background: #f26b21;
+    transform-origin: left center;
+    z-index: 1;
+    opacity: 0.55;
+  }
+
+  .line-one {
+    width: 145px;
+    top: 105px;
+    left: 145px;
+    transform: rotate(25deg);
+  }
+
+  .line-two {
+    width: 125px;
+    top: 220px;
+    right: 135px;
+    transform: rotate(-28deg);
+  }
+
+  .line-three {
+    width: 150px;
+    bottom: 105px;
+    left: 155px;
+    transform: rotate(-24deg);
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(0.94);
+      opacity: 0.35;
+    }
+
+    50% {
+      transform: scale(1.06);
+      opacity: 0.7;
+    }
+  }
+
+  /* -----------------------------
+     Tablet
+  ----------------------------- */
+
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+
+    .about-content {
+      max-width: 720px;
+    }
+
+    .about-visual {
+      margin-bottom: 30px;
+    }
+  }
+
+  /* -----------------------------
+     Mobile
+  ----------------------------- */
+
+  @media (max-width: 560px) {
+    .about {
+      gap: 35px;
+      min-height: auto;
+    }
+
+    .about-visual {
+      min-height: 390px;
+      transform: scale(0.9);
+      transform-origin: center top;
+      margin-bottom: -30px;
+    }
+
+    .about-node {
+      width: 145px;
+      min-height: 82px;
+      padding: 14px 16px;
+    }
+
+    .about-node strong {
+      font-size: 16px;
+    }
+
+    .about-node small {
+      font-size: 10px;
+    }
+
+    .node-people {
+      left: 0;
+    }
+
+    .node-systems {
+      right: 0;
+    }
+
+    .node-technology {
+      left: 10px;
+    }
+
+    .about-core {
+      width: 105px;
+      height: 105px;
+    }
+
+    .about-core span {
+      width: 125px;
+      height: 125px;
+    }
+
+    .about-core b {
+      font-size: 14px;
+    }
+  }
+</style>

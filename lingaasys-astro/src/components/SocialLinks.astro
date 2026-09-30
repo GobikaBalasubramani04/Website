@@ -1,0 +1,19 @@
+---
+import Icon from './Icon.astro';
+import { CONFIG } from '../data/site';
+interface Props { class?: string }
+const items = [
+  { name: 'LinkedIn', icon: 'linkedin', url: CONFIG.linkedin },
+  { name: 'Instagram', icon: 'instagram', url: CONFIG.instagram },
+  { name: 'Google', icon: 'google', url: CONFIG.google },
+  { name: 'Email', icon: 'email', url: CONFIG.email ? `mailto:${CONFIG.email}` : null }] as const;
+---
+<ul class:list={['soc', Astro.props.class]}>
+  {items.map((i) => (
+    <li>{i.url
+      ? <a href={i.url} aria-label={i.name} target={i.name === 'Email' ? undefined : '_blank'} rel="noopener"><Icon name={i.icon} /></a>
+      : <a href="/contact" aria-disabled="true" aria-label={`${i.name} (link not yet added)`} title={`${i.name}: link not yet added`} data-placeholder><Icon name={i.icon} /></a>}</li>))}
+</ul>
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('a[data-placeholder]').forEach((a) => a.addEventListener('click', (e) => e.preventDefault()));
+</script>

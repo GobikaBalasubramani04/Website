@@ -1,0 +1,5 @@
+---
+import Icon from '../Icon.astro'; import { CONFIG } from '../../data/site';
+const items=[['Email','Start a direct conversation','email',CONFIG.email?`mailto:${CONFIG.email}`:null],['LinkedIn','Connect with Lingaasys','linkedin',CONFIG.linkedin],['Instagram','Follow the Lingaasys journey','instagram',CONFIG.instagram],['Google','Find our company profile','google',CONFIG.google]] as const;
+---
+<section class="page-section contact-options"><div class="wrap"><div class="section-intro rv"><span class="eyebrow">Ways to Connect</span><h2>Choose your starting point.</h2></div><div class="contact-option-grid">{items.map(([title,text,icon,url])=> url ? <a class="contact-option rv" href={url} target={title === 'Email' ? undefined : '_blank'} rel="noopener"><span class="option-icon"><Icon name={icon}/></span><strong>{title}</strong><p>{text}</p><small>Open →</small></a> : <div class="contact-option rv disabled" aria-disabled="true"><span class="option-icon"><Icon name={icon}/></span><strong>{title}</strong><p>{text}</p><small>Link to be added</small></div>)}</div></div></section>

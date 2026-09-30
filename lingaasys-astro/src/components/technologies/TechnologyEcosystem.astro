@@ -1,0 +1,4 @@
+---
+import { TECH } from '../../data/site';
+---
+<section class="page-section ecosystem"><div class="wrap"><div class="section-intro rv"><span class="eyebrow">Technology Ecosystem</span><h2>Tools work better as a system.</h2><p>Explore how different technologies can contribute to a larger engineering flow.</p></div><div class="ecosystem-map">{TECH.flatMap(g => g.items.map(t => ({...t, group:g.group}))).map((t,i) => <button class="eco-node rv" type="button" data-role={t.group} data-description={t.text} aria-pressed="false" style={`--i:${i}`}>{t.name}<small>{t.group}</small></button>)}</div><div class="eco-detail rv" id="eco-detail" aria-live="polite"><strong>Select a technology</strong><span>Hover or focus a node to see its role.</span></div></div></section>

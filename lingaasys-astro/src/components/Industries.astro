@@ -1,0 +1,525 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { INDUSTRIES } from '../data/site';
+
+interface Props {
+  cta?: boolean;
+}
+
+const { cta = true } = Astro.props;
+---
+
+<section class="ind" id="industries">
+  <div class="wrap">
+
+    <SectionHeading
+      eyebrow="Industries"
+      title="Engineering for Every Industry"
+      lead="We apply technology and engineering across business domains, adapting systems to the way each industry works."
+    />
+
+    <div class="tiles">
+      {
+        INDUSTRIES.map((i) => (
+          <button
+            class="tile"
+            type="button"
+            aria-pressed="false"
+            data-title={i.title}
+            data-text={i.text}
+          >
+            <span class="tile-title">{i.title}</span>
+            <span class="tile-arrow">↗</span>
+          </button>
+        ))
+      }
+    </div>
+
+    <div
+      class="ipanel"
+      id="ipanel"
+      aria-live="polite"
+    ></div>
+
+    {
+      cta && (
+        <div class="sec-cta">
+          <a class="btn k" href="/industries">
+            Explore Industries
+          </a>
+        </div>
+      )
+    }
+
+  </div>
+</section>
+
+<script>
+  const tiles =
+    document.querySelectorAll<HTMLButtonElement>('.tile');
+
+  const panel =
+    document.querySelector<HTMLElement>('#ipanel');
+
+  let activeTile: HTMLButtonElement | null = null;
+
+  const closePanel = () => {
+    tiles.forEach((tile) => {
+      tile.classList.remove('active');
+      tile.setAttribute('aria-pressed', 'false');
+    });
+
+    if (panel) {
+      panel.classList.remove('visible');
+      panel.innerHTML = '';
+    }
+
+    activeTile = null;
+  };
+
+  const openPanel = (tile: HTMLButtonElement) => {
+    const title = tile.dataset.title || '';
+    const text = tile.dataset.text || '';
+
+    tiles.forEach((item) => {
+      item.classList.remove('active');
+      item.setAttribute('aria-pressed', 'false');
+    });
+
+    tile.classList.add('active');
+    tile.setAttribute('aria-pressed', 'true');
+
+    if (!panel) return;
+
+    const slug = title
+      .toLowerCase()
+      .replace(/\s*\/\s*/g, '-')
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '');
+
+    panel.innerHTML = `
+      <div class="panel-content">
+        <span>INDUSTRY</span>
+        <h3>${title}</h3>
+        <p>${text}</p>
+
+        <a href="/industries/${slug}" class="panel-link">
+          <span>View More</span>
+          <strong>→</strong>
+        </a>
+      </div>
+    `;
+
+    panel.classList.add('visible');
+
+    activeTile = tile;
+  };
+
+  tiles.forEach((tile) => {
+    tile.addEventListener('click', () => {
+      if (activeTile === tile) {
+        closePanel();
+      } else {
+        openPanel(tile);
+      }
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+
+    if (!(target instanceof Node)) return;
+
+    if (
+      !document.querySelector('.ind')?.contains(target)
+    ) {
+      closePanel();
+    }
+  });
+</script>
+
+<style>
+  .ind {
+    padding: 110px 0 120px;
+    background: var(--bg, #f5f5f3);
+  }
+
+  .wrap {
+    width: min(1180px, 88vw);
+    margin: 0 auto;
+  }
+
+  /* =========================
+     INDUSTRY CARDS
+  ========================= */
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 65px;
+  }
+
+  .tile {
+    position: relative;
+
+    min-height: 150px;
+
+    padding: 24px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    border: 1px solid #dededb;
+
+    background: #ffffff;
+
+    color: #171717;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease,
+      background 0.3s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .tile::before {
+    content: '';
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: -45px;
+    top: -45px;
+
+    border-radius: 50%;
+
+    background: rgba(242, 106, 33, 0.08);
+
+    transition:
+      transform 0.4s ease,
+      background 0.4s ease;
+  }
+
+  .tile:hover,
+  .tile.active {
+    transform: translateY(-5px);
+
+    border-color: #f26a21;
+
+    background: #ffffff;
+
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  .tile:hover::before,
+  .tile.active::before {
+    transform: scale(2.4);
+
+    background: rgba(242, 106, 33, 0.12);
+  }
+
+  .tile-title {
+    position: relative;
+    z-index: 2;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    letter-spacing: -0.04em;
+  }
+
+  .tile-arrow {
+    position: relative;
+    z-index: 2;
+
+    font-size: 20px;
+
+    color: #f26a21;
+
+    opacity: 0;
+
+    transform: translate(-5px, 5px);
+
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .tile:hover .tile-arrow,
+  .tile.active .tile-arrow {
+    opacity: 1;
+
+    transform: translate(0, 0);
+  }
+
+  /* =========================
+     INFORMATION PANEL
+  ========================= */
+
+  .ipanel {
+    width: min(650px, 100%);
+
+    margin: 0 auto;
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transform: translateY(-10px);
+
+    pointer-events: none;
+
+    transition:
+      max-height 0.4s ease,
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      margin 0.3s ease;
+  }
+
+  .ipanel.visible {
+    max-height: 250px;
+
+    margin-top: 25px;
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+  }
+
+  .panel-content {
+    padding: 25px;
+
+    background: #171717;
+
+    border: 1px solid rgba(242, 106, 33, 0.35);
+  }
+
+  .panel-content > span {
+    color: #f26a21;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.18em;
+  }
+
+  .panel-content h3 {
+    margin: 8px 0;
+
+    color: #ffffff;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+    letter-spacing: -0.04em;
+  }
+
+  .panel-content p {
+    max-width: 560px;
+
+    margin: 0 0 18px;
+
+    color: #aaa;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+  }
+
+  .panel-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 10px 14px;
+
+    background: #f26a21;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    transition:
+      background 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .panel-link:hover {
+    background: #ffffff;
+
+    color: #171717;
+
+    transform: translateX(4px);
+  }
+
+  .panel-link strong {
+    font-size: 14px;
+
+    font-weight: 400;
+  }
+
+  /* =========================
+     CTA
+  ========================= */
+
+  .sec-cta {
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 50px;
+  }
+
+  .sec-cta .btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 12px 18px;
+
+    background: #171717;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition:
+      background 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .sec-cta .btn:hover {
+    background: #f26a21;
+
+    transform: translateY(-2px);
+  }
+
+  /* =========================
+     TABLET
+  ========================= */
+
+  @media (max-width: 900px) {
+    .tiles {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .tile {
+      min-height: 135px;
+      padding: 20px;
+    }
+
+    .tile-title {
+      font-size: 20px;
+    }
+  }
+
+  /* =========================
+     MOBILE
+  ========================= */
+
+  @media (max-width: 600px) {
+    .ind {
+      padding: 80px 0 90px;
+    }
+
+    .wrap {
+      width: calc(100% - 30px);
+    }
+
+    .tiles {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 45px;
+    }
+
+    .tile {
+      min-height: 115px;
+      padding: 17px;
+    }
+
+    .tile-title {
+      font-size: 16px;
+    }
+
+    .tile-arrow {
+      font-size: 16px;
+    }
+
+    .panel-content {
+      padding: 20px;
+    }
+
+    .panel-content h3 {
+      font-size: 24px;
+    }
+
+    .panel-content p {
+      font-size: 11px;
+    }
+  }
+
+  /* =========================
+     SMALL MOBILE
+  ========================= */
+
+  @media (max-width: 380px) {
+    .tiles {
+      gap: 10px;
+    }
+
+    .tile {
+      min-height: 105px;
+      padding: 14px;
+    }
+
+    .tile-title {
+      font-size: 14px;
+    }
+  }
+
+  /* =========================
+     REDUCED MOTION
+  ========================= */
+
+  @media (prefers-reduced-motion: reduce) {
+    .tile,
+    .tile::before,
+    .tile-arrow,
+    .ipanel,
+    .sec-cta .btn {
+      transition: none;
+    }
+  }
+</style>

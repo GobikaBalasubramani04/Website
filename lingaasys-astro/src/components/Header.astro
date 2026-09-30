@@ -1,0 +1,79 @@
+---
+import Logo from './Logo.astro';
+import { NAV } from '../data/site';
+
+interface Props {
+  current?: string;
+}
+
+const { current = '' } = Astro.props;
+---
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="wrap nav">
+
+    <a class="logo" href="/" aria-label="Lingaasys home">
+      <Logo decorative />
+      Lingaasys
+    </a>
+
+    <button
+      class="burger"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="nav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="links" id="nav">
+      {
+        NAV.map((n) => (
+          <li>
+            <a
+              href={n.href}
+              aria-current={current === n.id ? 'page' : undefined}
+              class:list={{ on: current === n.id }}
+            >
+              {n.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+  </div>
+</header>
+
+<script>
+  const burger = document.querySelector('.burger');
+  const menu = document.getElementById('nav');
+
+  const close = () => {
+    menu?.classList.remove('open');
+    burger?.setAttribute('aria-expanded', 'false');
+  };
+
+  burger?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('open');
+
+    burger?.setAttribute(
+      'aria-expanded',
+      String(!!isOpen)
+    );
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', close);
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      close();
+    }
+  });
+</script>

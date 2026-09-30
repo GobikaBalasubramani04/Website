@@ -1,0 +1,5 @@
+---
+import type { Career } from '../data/site';
+const { title, quote, text, dark } = Astro.props as Career;
+---
+<article class:list={['career', 'rv', { d: dark }]}><h3>{title}</h3><q>{quote}</q><p>{text}</p><a class="more" href="/careers">Explore Opportunities</a></article>

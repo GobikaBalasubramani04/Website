@@ -1,0 +1,6 @@
+---
+import Layout from '../../layouts/Layout.astro'; import Header from '../../components/Header.astro'; import Chatbot from '../../components/Chatbot.astro'; import Footer from '../../components/Footer.astro'; import IndustryDetail from '../../components/industries/IndustryDetail.astro'; import { getIndustry } from '../../data/industries';
+const data = getIndustry('hrms');
+if (!data) throw new Error('Industry not found');
+---
+<Layout title={`${data.title} — Industries — Lingaasys`} description={data.short}><Header current="industries"/><main id="main" class="internal-page"><IndustryDetail data={data}/></main><Chatbot/><Footer/></Layout>

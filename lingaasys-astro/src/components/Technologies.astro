@@ -1,0 +1,14 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { TECH } from '../data/site';
+interface Props { cta?: boolean }
+const { cta = true } = Astro.props;
+---
+<section id="technologies"><div class="wrap">
+  <SectionHeading eyebrow="Technologies" title="The tools behind our systems" lead="We use modern technologies to build scalable, maintainable systems. Select a technology to see how we use it." />
+  <div class="tech"><div>
+    {TECH.map((g) => <div class="grp"><em>{g.group}</em><div class="chips">
+      {g.items.map((t) => <button class="chip" type="button" aria-pressed="false" data-title={t.name} data-text={t.text}>{t.name}</button>)}</div></div>)}</div>
+    <div class="det" id="tdet" aria-live="polite"></div></div>
+  {cta && <div class="sec-cta"><a class="btn k" href="/technologies">Explore Technologies</a></div>}</div></section>
+<script>import { bindPicker } from '../scripts/picker'; bindPicker('.chip', '#tdet');</script>

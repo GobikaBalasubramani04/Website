@@ -1,0 +1,15 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import SocialLinks from './SocialLinks.astro';
+import { CONFIG } from '../data/site';
+interface Props { cta?: boolean }
+const { cta = true } = Astro.props;
+---
+<section class="contact" id="contact"><div class="wrap">
+  <SectionHeading eyebrow="Contact" title="Let's Connect" lead="Have an idea, a problem to solve, or a question about working with us? Start a conversation." />
+  {CONFIG.email
+    ? <a class="mail" href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>
+    : <span class="mail ph">[company email — to be added]</span>}
+  <p class="note">Placeholders are not live links. Add real values in src/data/site.ts.</p>
+  <SocialLinks />
+  {cta && <div class="sec-cta"><a class="btn k" href="/contact">Let's Connect</a></div>}</div></section>

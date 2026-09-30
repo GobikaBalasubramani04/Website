@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Culture from '../components/Culture.astro';
+import Technologies from '../components/Technologies.astro';
+import Industries from '../components/Industries.astro';
+import Careers from '../components/Careers.astro';
+import Contact from '../components/Contact.astro';
+import Chatbot from '../components/Chatbot.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout>
+  <Header current="home" />
+  <main id="main"><Hero /><About /><Culture /><Technologies /><Industries /><Careers /><Contact /></main>
+  <Chatbot />
+  <Footer />
+</Layout>

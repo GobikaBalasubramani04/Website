@@ -1,0 +1,11 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import CultureCard from './CultureCard.astro';
+import { CULTURE } from '../data/site';
+interface Props { cta?: boolean }
+const { cta = true } = Astro.props;
+---
+<section class="dark cult" id="culture"><div class="wrap">
+  <SectionHeading eyebrow="Culture" title="Sooner. Safer. Happier." /><div style="height:48px"></div>
+  {CULTURE.map((c) => <CultureCard {...c} />)}
+  {cta && <div class="sec-cta"><a class="btn" href="/culture">Experience Our Culture</a></div>}</div></section>

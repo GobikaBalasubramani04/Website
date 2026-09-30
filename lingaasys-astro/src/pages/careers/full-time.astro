@@ -1,0 +1,1748 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Chatbot from "../../components/Chatbot.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<Layout title="Full Time Opportunities — Lingaasys">
+
+  <Header current="careers" />
+
+  <main class="full-time-page">
+
+    <!-- =================================
+         HERO
+    ================================== -->
+
+    <section class="page-hero">
+      <div class="wrap">
+
+        <a href="/careers" class="back-link">
+          ← Back to Careers
+        </a>
+
+        <span class="eyebrow">FULL TIME</span>
+
+        <h1>
+          Full Time<br />
+          Opportunities
+        </h1>
+
+        <p>
+          Explore full-time opportunities at Lingaasys and
+          find a role where you can build, contribute and grow.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- =================================
+         OPEN ROLES
+    ================================== -->
+
+    <section class="roles-section">
+
+      <div class="wrap">
+
+        <div class="section-heading">
+          <span class="eyebrow">OPEN ROLES</span>
+
+          <h2>
+            Available Opportunities
+          </h2>
+        </div>
+
+
+        <!-- =================================
+             SOFTWARE ENGINEER
+        ================================== -->
+
+        <article class="role-card">
+
+          <div class="role-main">
+
+            <span class="role-category">
+              ENGINEERING
+            </span>
+
+            <h3>
+              Software Engineer
+            </h3>
+
+            <p class="short-description">
+              Build scalable applications and work with modern
+              technologies to solve real-world engineering problems.
+            </p>
+
+          </div>
+
+
+          <button
+            class="show-more"
+            type="button"
+            data-target="software"
+          >
+            Show More
+            <span>+</span>
+          </button>
+
+
+          <div
+            class="role-details"
+            id="software"
+          >
+
+            <div class="job-description">
+
+              <span class="detail-label">
+                JOB DESCRIPTION
+              </span>
+
+              <p>
+                Design, develop and maintain reliable software
+                systems while collaborating with the team to
+                build scalable and meaningful technology solutions.
+              </p>
+
+            </div>
+
+
+            <button
+              class="apply-btn"
+              type="button"
+              data-apply="software-application"
+            >
+              Apply Now
+              <span>↗</span>
+            </button>
+
+
+            <!-- APPLICATION -->
+
+            <div
+              class="resume-section"
+              id="software-application"
+            >
+
+              <span class="detail-label">
+                APPLICATION
+              </span>
+
+              <h4>
+                Apply for Software Engineer
+              </h4>
+
+              <p class="application-description">
+                Upload your latest resume to continue with
+                your application.
+              </p>
+
+
+              <!-- RESUME UPLOAD -->
+
+              <label class="upload-box">
+
+                <div class="upload-text">
+
+                  <strong>
+                    Choose your resume
+                  </strong>
+
+                  <small>
+                    PDF or DOCX
+                  </small>
+
+                </div>
+
+                <span class="browse-text">
+                  Browse
+                </span>
+
+                <input
+                  class="resume-input"
+                  type="file"
+                  accept=".pdf,.docx"
+                />
+
+              </label>
+
+
+              <p class="selected-file"></p>
+
+
+              <!-- APPLICATION DETAILS -->
+
+              <div class="application-form">
+
+                <span class="detail-label">
+                  APPLICATION DETAILS
+                </span>
+
+
+                <div class="form-grid">
+
+                  <!-- FULL NAME -->
+
+                  <div class="form-field">
+
+                    <label for="software-name">
+                      Full Name
+                    </label>
+
+                    <input
+                      id="software-name"
+                      type="text"
+                      placeholder="Your full name"
+                    />
+
+                  </div>
+
+
+                  <!-- EMAIL -->
+
+                  <div class="form-field">
+
+                    <label for="software-email">
+                      Email
+                    </label>
+
+                    <input
+                      id="software-email"
+                      type="email"
+                      placeholder="you@example.com"
+                    />
+
+                  </div>
+
+
+                  <!-- PHONE -->
+
+                  <div class="form-field">
+
+                    <label for="software-phone">
+                      Phone
+                    </label>
+
+                    <input
+                      id="software-phone"
+                      type="tel"
+                      placeholder="Your phone number"
+                    />
+
+                  </div>
+
+
+                  <!-- ROLE -->
+
+                  <div class="form-field">
+
+                    <label for="software-role">
+                      Applying For
+                    </label>
+
+                    <input
+                      id="software-role"
+                      type="text"
+                      value="Software Engineer"
+                      readonly
+                    />
+
+                  </div>
+
+
+                  <!-- LINKEDIN -->
+
+                  <div class="form-field">
+
+                    <label for="software-linkedin">
+                      LinkedIn
+                    </label>
+
+                    <input
+                      id="software-linkedin"
+                      type="url"
+                      placeholder="LinkedIn profile URL"
+                    />
+
+                  </div>
+
+
+                  <!-- PORTFOLIO -->
+
+                  <div class="form-field">
+
+                    <label for="software-portfolio">
+                      Portfolio
+                    </label>
+
+                    <input
+                      id="software-portfolio"
+                      type="url"
+                      placeholder="Portfolio URL"
+                    />
+
+                  </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                  class="submit-btn"
+                  type="button"
+                >
+                  Submit Application
+                  <span>↗</span>
+                </button>
+
+                <p class="submit-message"></p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- =================================
+             FRONTEND ENGINEER
+        ================================== -->
+
+        <article class="role-card">
+
+          <div class="role-main">
+
+            <span class="role-category">
+              ENGINEERING
+            </span>
+
+            <h3>
+              Frontend Engineer
+            </h3>
+
+            <p class="short-description">
+              Create responsive and engaging interfaces using
+              modern frontend technologies and frameworks.
+            </p>
+
+          </div>
+
+
+          <button
+            class="show-more"
+            type="button"
+            data-target="frontend"
+          >
+            Show More
+            <span>+</span>
+          </button>
+
+
+          <div
+            class="role-details"
+            id="frontend"
+          >
+
+            <div class="job-description">
+
+              <span class="detail-label">
+                JOB DESCRIPTION
+              </span>
+
+              <p>
+                Build intuitive and responsive user interfaces,
+                collaborate with backend teams and create
+                high-quality digital experiences.
+              </p>
+
+            </div>
+
+
+            <button
+              class="apply-btn"
+              type="button"
+              data-apply="frontend-application"
+            >
+              Apply Now
+              <span>↗</span>
+            </button>
+
+
+            <!-- APPLICATION -->
+
+            <div
+              class="resume-section"
+              id="frontend-application"
+            >
+
+              <span class="detail-label">
+                APPLICATION
+              </span>
+
+              <h4>
+                Apply for Frontend Engineer
+              </h4>
+
+              <p class="application-description">
+                Upload your latest resume to continue with
+                your application.
+              </p>
+
+
+              <!-- RESUME UPLOAD -->
+
+              <label class="upload-box">
+
+                <div class="upload-text">
+
+                  <strong>
+                    Choose your resume
+                  </strong>
+
+                  <small>
+                    PDF or DOCX
+                  </small>
+
+                </div>
+
+                <span class="browse-text">
+                  Browse
+                </span>
+
+                <input
+                  class="resume-input"
+                  type="file"
+                  accept=".pdf,.docx"
+                />
+
+              </label>
+
+
+              <p class="selected-file"></p>
+
+
+              <!-- APPLICATION DETAILS -->
+
+              <div class="application-form">
+
+                <span class="detail-label">
+                  APPLICATION DETAILS
+                </span>
+
+
+                <div class="form-grid">
+
+                  <!-- FULL NAME -->
+
+                  <div class="form-field">
+
+                    <label for="frontend-name">
+                      Full Name
+                    </label>
+
+                    <input
+                      id="frontend-name"
+                      type="text"
+                      placeholder="Your full name"
+                    />
+
+                  </div>
+
+
+                  <!-- EMAIL -->
+
+                  <div class="form-field">
+
+                    <label for="frontend-email">
+                      Email
+                    </label>
+
+                    <input
+                      id="frontend-email"
+                      type="email"
+                      placeholder="you@example.com"
+                    />
+
+                  </div>
+
+
+                  <!-- PHONE -->
+
+                  <div class="form-field">
+
+                    <label for="frontend-phone">
+                      Phone
+                    </label>
+
+                    <input
+                      id="frontend-phone"
+                      type="tel"
+                      placeholder="Your phone number"
+                    />
+
+                  </div>
+
+
+                  <!-- ROLE -->
+
+                  <div class="form-field">
+
+                    <label for="frontend-role">
+                      Applying For
+                    </label>
+
+                    <input
+                      id="frontend-role"
+                      type="text"
+                      value="Frontend Engineer"
+                      readonly
+                    />
+
+                  </div>
+
+
+                  <!-- LINKEDIN -->
+
+                  <div class="form-field">
+
+                    <label for="frontend-linkedin">
+                      LinkedIn
+                    </label>
+
+                    <input
+                      id="frontend-linkedin"
+                      type="url"
+                      placeholder="LinkedIn profile URL"
+                    />
+
+                  </div>
+
+
+                  <!-- PORTFOLIO -->
+
+                  <div class="form-field">
+
+                    <label for="frontend-portfolio">
+                      Portfolio
+                    </label>
+
+                    <input
+                      id="frontend-portfolio"
+                      type="url"
+                      placeholder="Portfolio URL"
+                    />
+
+                  </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                  class="submit-btn"
+                  type="button"
+                >
+                  Submit Application
+                  <span>↗</span>
+                </button>
+
+                <p class="submit-message"></p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <Chatbot />
+
+  <Footer />
+
+</Layout>
+
+
+<script>
+
+  /* =================================
+     SHOW MORE / SHOW LESS
+  ================================= */
+
+  const showButtons =
+    document.querySelectorAll(".show-more");
+
+  showButtons.forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+      const target =
+        button.getAttribute("data-target");
+
+      const details =
+        document.getElementById(target);
+
+      if (!details) return;
+
+      details.classList.toggle("active");
+
+      if (details.classList.contains("active")) {
+
+        button.innerHTML =
+          'Show Less <span>−</span>';
+
+      } else {
+
+        button.innerHTML =
+          'Show More <span>+</span>';
+
+      }
+
+    });
+
+  });
+
+
+
+  /* =================================
+     APPLY BUTTON
+  ================================= */
+
+  const applyButtons =
+    document.querySelectorAll(".apply-btn");
+
+  applyButtons.forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+      const target =
+        button.getAttribute("data-apply");
+
+      const resumeSection =
+        document.getElementById(target);
+
+      if (!resumeSection) return;
+
+      resumeSection.classList.add("active");
+
+      resumeSection.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+    });
+
+  });
+
+
+
+  /* =================================
+     RESUME UPLOAD + PARSING
+  ================================= */
+
+  const resumeInputs =
+    document.querySelectorAll(".resume-input");
+
+  resumeInputs.forEach((input) => {
+
+    input.addEventListener("change", async () => {
+
+      const resumeSection =
+        input.closest(".resume-section");
+
+      if (!resumeSection) return;
+
+      const file =
+        input.files?.[0];
+
+      const fileDisplay =
+        resumeSection.querySelector(".selected-file");
+
+      const applicationForm =
+        resumeSection.querySelector(".application-form");
+
+      if (!file) {
+
+        fileDisplay.textContent = "";
+
+        applicationForm.classList.remove("active");
+
+        return;
+
+      }
+
+
+      /* Show selected file */
+
+      fileDisplay.textContent =
+        `✓ ${file.name}`;
+
+
+      /* Show form */
+
+      applicationForm.classList.add("active");
+
+
+      /* =================================
+         SEND RESUME TO ASTRO API
+      ================================= */
+
+      const formData =
+        new FormData();
+
+      formData.append("resume", file);
+
+
+      try {
+
+        fileDisplay.textContent =
+          `✓ ${file.name} — Reading resume...`;
+
+
+        const response =
+          await fetch("/api/parse-resume", {
+            method: "POST",
+            body: formData
+          });
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error || "Failed to parse resume"
+          );
+
+        }
+
+
+        /* =================================
+           FIND FORM INPUTS
+        ================================= */
+
+        const nameInput =
+          resumeSection.querySelector(
+            'input[id$="-name"]'
+          );
+
+        const emailInput =
+          resumeSection.querySelector(
+            'input[id$="-email"]'
+          );
+
+        const phoneInput =
+          resumeSection.querySelector(
+            'input[id$="-phone"]'
+          );
+
+        const linkedinInput =
+          resumeSection.querySelector(
+            'input[id$="-linkedin"]'
+          );
+
+        const portfolioInput =
+          resumeSection.querySelector(
+            'input[id$="-portfolio"]'
+          );
+
+
+        /* =================================
+           AUTO FILL RESUME DETAILS
+        ================================= */
+
+        if (nameInput) {
+
+          nameInput.value =
+            data.name || "";
+
+        }
+
+
+        if (emailInput) {
+
+          emailInput.value =
+            data.email || "";
+
+        }
+
+
+        if (phoneInput) {
+
+          phoneInput.value =
+            data.phone || "";
+
+        }
+
+
+        if (linkedinInput) {
+
+          linkedinInput.value =
+            data.linkedin || "";
+
+        }
+
+
+        if (portfolioInput) {
+
+          portfolioInput.value =
+            data.portfolio || "";
+
+        }
+
+
+        /* =================================
+           SUCCESS MESSAGE
+        ================================= */
+
+        fileDisplay.textContent =
+          `✓ ${file.name} — Resume details detected`;
+
+
+      } catch (error) {
+
+        console.error(
+          "Resume parsing failed:",
+          error
+        );
+
+
+        fileDisplay.textContent =
+          `✓ ${file.name} — Could not read resume details`;
+
+      }
+
+    });
+
+  });
+
+
+
+  /* =================================
+     SUBMIT APPLICATION → BFF
+  ================================= */
+
+  const submitButtons =
+    document.querySelectorAll(".submit-btn");
+
+  submitButtons.forEach((button) => {
+
+    button.addEventListener("click", async () => {
+
+      const resumeSection =
+        button.closest(".resume-section");
+
+      if (!resumeSection) return;
+
+
+      /* Find resume */
+
+      const resumeInput =
+        resumeSection.querySelector(".resume-input");
+
+      const file =
+        resumeInput?.files?.[0];
+
+
+      /* Find form fields */
+
+      const nameInput =
+        resumeSection.querySelector(
+          'input[id$="-name"]'
+        );
+
+      const emailInput =
+        resumeSection.querySelector(
+          'input[id$="-email"]'
+        );
+
+      const phoneInput =
+        resumeSection.querySelector(
+          'input[id$="-phone"]'
+        );
+
+      const roleInput =
+        resumeSection.querySelector(
+          'input[id$="-role"]'
+        );
+
+      const linkedinInput =
+        resumeSection.querySelector(
+          'input[id$="-linkedin"]'
+        );
+
+      const portfolioInput =
+        resumeSection.querySelector(
+          'input[id$="-portfolio"]'
+        );
+
+      const message =
+        resumeSection.querySelector(".submit-message");
+
+
+      /* =================================
+         BASIC FRONTEND VALIDATION
+      ================================= */
+
+      if (!file) {
+
+        message.textContent =
+          "Please upload your resume.";
+
+        message.className =
+          "submit-message error";
+
+        return;
+
+      }
+
+
+      if (
+        !nameInput?.value.trim() ||
+        !emailInput?.value.trim() ||
+        !roleInput?.value.trim()
+      ) {
+
+        message.textContent =
+          "Please fill in the required details.";
+
+        message.className =
+          "submit-message error";
+
+        return;
+
+      }
+
+
+      /* =================================
+         CREATE BFF FORM DATA
+      ================================= */
+
+      const formData =
+        new FormData();
+
+      formData.append(
+        "resume",
+        file
+      );
+
+      formData.append(
+        "name",
+        nameInput.value.trim()
+      );
+
+      formData.append(
+        "email",
+        emailInput.value.trim()
+      );
+
+      formData.append(
+        "phone",
+        phoneInput?.value.trim() || ""
+      );
+
+      formData.append(
+        "role",
+        roleInput.value.trim()
+      );
+
+      formData.append(
+        "linkedin",
+        linkedinInput?.value.trim() || ""
+      );
+
+      formData.append(
+        "portfolio",
+        portfolioInput?.value.trim() || ""
+      );
+
+
+      /* =================================
+         SUBMIT TO ASTRO BFF
+      ================================= */
+
+      const originalText =
+        button.innerHTML;
+
+      button.disabled = true;
+
+      button.innerHTML =
+        "Submitting...";
+
+
+      message.textContent = "";
+
+
+      try {
+
+        const response =
+          await fetch("/api/apply", {
+            method: "POST",
+            body: formData
+          });
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error || "Application submission failed"
+          );
+
+        }
+
+
+        /* =================================
+           SUCCESS
+        ================================= */
+
+        message.textContent =
+          "✓ Application submitted successfully.";
+
+        message.className =
+          "submit-message success";
+
+
+        button.innerHTML =
+          "Application Submitted ✓";
+
+
+        /* Keep button disabled after success */
+
+        button.disabled = true;
+
+
+      } catch (error) {
+
+        console.error(
+          "Application submission failed:",
+          error
+        );
+
+
+        message.textContent =
+          error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.";
+
+        message.className =
+          "submit-message error";
+
+
+        button.disabled = false;
+
+        button.innerHTML =
+          originalText;
+
+      }
+
+    });
+
+  });
+
+</script>
+
+
+<style>
+
+  /* =================================
+     PAGE
+  ================================= */
+
+  .full-time-page {
+    width: 100%;
+    overflow: hidden;
+  }
+
+
+  .wrap {
+    width: min(1180px, 86vw);
+    margin: 0 auto;
+  }
+
+
+  /* =================================
+     HERO
+  ================================= */
+
+  .page-hero {
+    padding: 70px 0 110px;
+    background: #f5f5f3;
+  }
+
+
+  .back-link {
+    display: inline-block;
+
+    margin-bottom: 75px;
+
+    color: #666;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: color 0.25s ease;
+  }
+
+
+  .back-link:hover {
+    color: #f26a21;
+  }
+
+
+  .eyebrow {
+    color: #f26a21;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.18em;
+  }
+
+
+  .page-hero h1 {
+    margin: 18px 0 28px;
+
+    color: #171717;
+
+    font-size: clamp(58px, 8vw, 105px);
+
+    line-height: 0.9;
+
+    letter-spacing: -0.06em;
+  }
+
+
+  .page-hero p {
+    max-width: 600px;
+
+    margin: 0;
+
+    color: #707070;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+  }
+
+
+  /* =================================
+     ROLES
+  ================================= */
+
+  .roles-section {
+    padding: 110px 0 140px;
+
+    background: #fff;
+  }
+
+
+  .section-heading {
+    margin-bottom: 55px;
+  }
+
+
+  .section-heading h2 {
+    margin: 15px 0 0;
+
+    color: #171717;
+
+    font-size: clamp(42px, 5vw, 68px);
+
+    line-height: 0.95;
+
+    letter-spacing: -0.05em;
+  }
+
+
+  /* =================================
+     ROLE CARD
+  ================================= */
+
+  .role-card {
+    position: relative;
+
+    padding: 35px 0;
+
+    border-top: 1px solid #ddd;
+  }
+
+
+  .role-card:last-child {
+    border-bottom: 1px solid #ddd;
+  }
+
+
+  .role-main {
+    padding-right: 190px;
+  }
+
+
+  .role-category {
+    color: #f26a21;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.16em;
+  }
+
+
+  .role-main h3 {
+    margin: 10px 0 10px;
+
+    color: #171717;
+
+    font-size: 30px;
+  }
+
+
+  .short-description {
+    max-width: 680px;
+
+    margin: 0;
+
+    color: #707070;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+  }
+
+
+  /* =================================
+     SHOW MORE
+  ================================= */
+
+  .show-more {
+    position: absolute;
+
+    top: 38px;
+    right: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 12px 18px;
+
+    border: 1px solid #d5d5d5;
+
+    background: #fff;
+
+    color: #171717;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+  }
+
+
+  .show-more span {
+    font-size: 18px;
+
+    font-weight: 400;
+  }
+
+
+  .show-more:hover {
+    border-color: #f26a21;
+
+    color: #f26a21;
+  }
+
+
+  /* =================================
+     DETAILS
+  ================================= */
+
+  .role-details {
+    display: none;
+
+    padding-top: 30px;
+  }
+
+
+  .role-details.active {
+    display: block;
+  }
+
+
+  .job-description {
+    max-width: 760px;
+
+    margin-bottom: 25px;
+  }
+
+
+  .detail-label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #f26a21;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.16em;
+  }
+
+
+  .job-description p {
+    margin: 0;
+
+    color: #707070;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+  }
+
+
+  /* =================================
+     APPLY BUTTON
+  ================================= */
+
+  .apply-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    padding: 14px 20px;
+
+    border: 1px solid #f26a21;
+
+    background: #f26a21;
+
+    color: #fff;
+
+    font-size: 12px;
+
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+  }
+
+
+  .apply-btn span {
+    font-size: 17px;
+
+    font-weight: 400;
+  }
+
+
+  .apply-btn:hover {
+    background: #171717;
+
+    border-color: #171717;
+  }
+
+
+  /* =================================
+     RESUME SECTION
+  ================================= */
+
+  .resume-section {
+    display: none;
+
+    max-width: 820px;
+
+    margin-top: 30px;
+
+    padding: 32px;
+
+    background: #f5f5f3;
+
+    border: 1px solid #ddd;
+  }
+
+
+  .resume-section.active {
+    display: block;
+  }
+
+
+  .resume-section h4 {
+    margin: 0 0 8px;
+
+    color: #171717;
+
+    font-size: 24px;
+  }
+
+
+  .application-description {
+    margin: 0 0 22px;
+
+    color: #707070;
+
+    font-size: 14px;
+  }
+
+
+  /* =================================
+     UPLOAD BOX
+  ================================= */
+
+  .upload-box {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    background: #fff;
+
+    border: 1px dashed #bbb;
+
+    color: #555;
+
+    cursor: pointer;
+
+    transition:
+      border-color 0.25s ease,
+      background 0.25s ease;
+  }
+
+
+  .upload-box:hover {
+    border-color: #f26a21;
+
+    background: #fff;
+  }
+
+
+  .upload-text {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+  }
+
+
+  .upload-text strong {
+    color: #171717;
+
+    font-size: 14px;
+  }
+
+
+  .upload-text small {
+    color: #888;
+
+    font-size: 11px;
+  }
+
+
+  .browse-text {
+    padding: 10px 16px;
+
+    background: #171717;
+
+    color: #fff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+  }
+
+
+  .upload-box input {
+    display: none;
+  }
+
+
+  /* =================================
+     SELECTED FILE
+  ================================= */
+
+  .selected-file {
+    margin: 14px 0 0;
+
+    color: #f26a21;
+
+    font-size: 12px;
+
+    font-weight: 700;
+  }
+
+
+  /* =================================
+     APPLICATION FORM
+  ================================= */
+
+  .application-form {
+    display: none;
+
+    margin-top: 35px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid #ddd;
+  }
+
+
+  .application-form.active {
+    display: block;
+  }
+
+
+  .form-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+
+    margin-top: 25px;
+  }
+
+
+  .form-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+
+  .form-field label {
+    color: #171717;
+
+    font-size: 11px;
+
+    font-weight: 700;
+  }
+
+
+  .form-field input {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 15px;
+
+    border: 1px solid #d5d5d5;
+
+    background: #fff;
+
+    color: #171717;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+
+  .form-field input:focus {
+    border-color: #f26a21;
+
+    box-shadow:
+      0 0 0 3px rgba(242, 106, 33, 0.08);
+  }
+
+
+  .form-field input[readonly] {
+    background: #eeeeec;
+
+    color: #666;
+
+    cursor: not-allowed;
+  }
+
+
+  /* =================================
+     SUBMIT
+  ================================= */
+
+  .submit-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 30px;
+
+    padding: 14px 20px;
+
+    border: 1px solid #171717;
+
+    background: #171717;
+
+    color: #fff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+
+  .submit-btn:hover:not(:disabled) {
+    background: #f26a21;
+
+    border-color: #f26a21;
+  }
+
+
+  .submit-btn:disabled {
+    opacity: 0.7;
+
+    cursor: not-allowed;
+  }
+
+
+  .submit-btn span {
+    font-size: 16px;
+  }
+
+
+  /* =================================
+     SUBMIT MESSAGE
+  ================================= */
+
+  .submit-message {
+    margin: 15px 0 0;
+
+    font-size: 13px;
+
+    font-weight: 700;
+  }
+
+
+  .submit-message.success {
+    color: #2f7d32;
+  }
+
+
+  .submit-message.error {
+    color: #c0392b;
+  }
+
+
+  /* =================================
+     MOBILE
+  ================================= */
+
+  @media (max-width: 700px) {
+
+    .wrap {
+      width: calc(100% - 40px);
+    }
+
+
+    .page-hero {
+      padding: 55px 0 85px;
+    }
+
+
+    .back-link {
+      margin-bottom: 55px;
+    }
+
+
+    .roles-section {
+      padding: 80px 0 100px;
+    }
+
+
+    .role-main {
+      padding-right: 0;
+    }
+
+
+    .show-more {
+      position: static;
+
+      margin-top: 20px;
+    }
+
+
+    .role-details {
+      padding-top: 25px;
+    }
+
+
+    .resume-section {
+      padding: 25px;
+    }
+
+
+    .upload-box {
+      align-items: flex-start;
+
+      flex-direction: column;
+    }
+
+
+    .browse-text {
+      width: 100%;
+
+      box-sizing: border-box;
+
+      text-align: center;
+    }
+
+
+    .form-grid {
+      grid-template-columns: 1fr;
+
+      gap: 18px;
+    }
+
+  }
+
+</style>

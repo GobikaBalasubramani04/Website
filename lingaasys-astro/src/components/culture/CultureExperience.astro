@@ -1,0 +1,11 @@
+---
+const values = [
+  ['Learning','Questions are part of building better systems.'],
+  ['Collaboration','Different perspectives make engineering stronger.'],
+  ['Ownership','People grow when they can take responsibility for meaningful work.'],
+  ['Growth','Progress comes from practice, feedback and new challenges.'],
+  ['Innovation','Useful ideas matter when they can become useful systems.'],
+  ['Teamwork','Good technology is built by people working with each other.']
+];
+---
+<section class="page-section culture-experience"><div class="wrap"><div class="section-intro rv"><span class="eyebrow">Culture In Practice</span><h2>People are part of the system.</h2></div><div class="value-stream">{values.map(([title,text],i) => <article class="value-line rv"><span>0{i+1}</span><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>

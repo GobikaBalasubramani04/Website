@@ -1,0 +1,48 @@
+---
+const items = [
+  { title: 'Real Projects', text: 'Work on practical systems and meaningful technology problems.' },
+  { title: 'Modern Technology', text: 'Learn and work with modern engineering technologies and development practices.' },
+  { title: 'Continuous Growth', text: 'Learn from experience, take ownership and keep growing with every challenge.' },
+  { title: 'Meaningful Systems', text: 'Contribute to technology designed to solve real-world problems.' },
+];
+---
+<section class="wj">
+  <div class="wj-inner">
+    <span class="wj-eyebrow">WHY JOIN LINGAASYS</span>
+    <ol class="wj-list">
+      {items.map((it, i) => (
+        <li class="wj-row">
+          <span class="wj-num">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{it.title}</h3>
+          <p>{it.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .wj { padding: 96px 0; background: #fff; color: #141414; }
+  .wj-inner { width: min(1180px, 100% - 48px); margin: 0 auto; }
+  .wj-eyebrow { display: block; margin-bottom: 32px; color: #f26a21; font-size: 12px; font-weight: 800; letter-spacing: .2em; }
+  .wj-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid #dadad8; }
+  .wj-row {
+    display: grid;
+    grid-template-columns: 72px minmax(200px, 1fr) 2fr;  /* number | title | description */
+    align-items: baseline;
+    column-gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid #dadad8;
+    transition: padding-left .3s ease;
+  }
+  .wj-row:hover { padding-left: 12px; }
+  .wj-num { color: #f26a21; font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+  .wj-row h3 { margin: 0; font-size: clamp(1.3rem, 2.4vw, 1.9rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
+  .wj-row p { margin: 0; color: #5e5e5b; font-size: 1.05rem; line-height: 1.65; max-width: 52ch; }
+  @media (max-width: 760px) {
+    .wj { padding: 64px 0; }
+    .wj-row { grid-template-columns: 48px 1fr; row-gap: 8px; padding: 24px 0; }
+    .wj-row p { grid-column: 2; }   /* description sits under the title, aligned with it */
+  }
+  @media (prefers-reduced-motion: reduce) { .wj-row { transition: none; } }
+</style>
