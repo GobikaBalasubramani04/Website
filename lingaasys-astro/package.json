@@ -1,3 +1,1 @@
-{"name":"lingaasys","type":"module","version":"1.0.0","private":true,
-"scripts":{"dev":"astro dev","build":"astro build","preview":"astro preview","check":"astro check","astro":"astro"},
-"dependencies":{"astro":"^5.0.0"},"devDependencies":{"@astrojs/check":"^0.9.4","typescript":"^5.6.0"}}
+{"name":"lingaasys","type":"module","version":"1.0.0","private":true,"scripts":{"dev":"astro dev","build":"astro build","preview":"astro preview","check":"astro check","astro":"astro"},"dependencies":{"@astrojs/node":"^9.5.5","@supabase/supabase-js":"^2.117.2","@types/node":"^26.6.3","astro":"^5.0.0","mammoth":"^1.13.0","pdf-parse":"^2.4.5"},"devDependencies":{"@astrojs/check":"^0.9.4","typescript":"^5.6.0"}}

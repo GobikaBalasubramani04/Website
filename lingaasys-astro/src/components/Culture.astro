@@ -6,6 +6,6 @@ interface Props { cta?: boolean }
 const { cta = true } = Astro.props;
 ---
 <section class="dark cult" id="culture"><div class="wrap">
-  <SectionHeading eyebrow="Culture" title="Sooner. Safer. Happier." /><div style="height:48px"></div>
+  <SectionHeading eyebrow="Culture" title="Sooner. Safer. Happier." />
   {CULTURE.map((c) => <CultureCard {...c} />)}
   {cta && <div class="sec-cta"><a class="btn" href="/culture">Experience Our Culture</a></div>}</div></section>

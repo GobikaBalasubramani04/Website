@@ -17,8 +17,11 @@
       Engineering · Human-centered · Innovation
     </div>
 
-    <h1>
-      Creating <span class="grad">Systems</span> for Humanity
+    <h1 id="heroQuote" aria-live="polite">
+      <span class="hw" data-word="0">Creating</span>
+      <span class="hw" data-word="1">Systems</span>
+      <span class="hw" data-word="2">for</span>
+      <span class="hw or" data-word="3">Humanity</span>
     </h1>
 
     <p class="sub">
@@ -59,8 +62,8 @@
 
     position: relative;
 
-    min-height: 100vh;
-    min-height: 100svh;
+    min-height: 92vh;
+    min-height: 92svh;
 
     display: flex;
     align-items: center;
@@ -253,7 +256,7 @@
 
     text-align: center;
 
-    padding: 120px 24px;
+    padding: 80px 24px;
   }
 
 
@@ -332,7 +335,7 @@
 
     letter-spacing: -0.02em;
 
-    margin: 0 0 28px;
+    margin: 0 0 20px;
 
     max-width: 16ch;
 
@@ -397,7 +400,7 @@
 
     line-height: 1.6;
 
-    margin: 0 0 44px;
+    margin: 0 0 32px;
   }
 
 
@@ -478,6 +481,21 @@
 
 
   /* =========================
+     WORD-BY-WORD
+     ========================= */
+
+  .hw {
+    display: inline-block;
+    margin-right: .26em;
+    opacity: 0;
+    transform: translateY(.35em);
+    transition: opacity .45s ease, transform .45s ease;
+  }
+  .hw:last-child { margin-right: 0; }
+  .hw.show { opacity: 1; transform: none; }
+
+
+  /* =========================
      MOBILE
      ========================= */
 
@@ -486,7 +504,7 @@
     .content {
       width: calc(100% - 30px);
 
-      padding: 100px 15px;
+      padding: 64px 15px;
     }
 
     .eyebrow-dot {
@@ -553,6 +571,9 @@
       display: none;
     }
 
+    .hw { opacity: 1 !important; transform: none !important; transition: none !important; }
+    header .logo { opacity: 1 !important; transition: none !important; }
+
   }
 
 </style>
@@ -565,7 +586,7 @@
      ========================= */
 
   const canvas =
-    document.getElementById('waves');
+    document.getElementById('waves') as HTMLCanvasElement | null;
 
   const reduce =
     window.matchMedia(
@@ -575,15 +596,7 @@
 
   if (canvas && !reduce) {
 
-    const ctx =
-      canvas.getContext('2d');
-
-    if (!ctx) {
-      throw new Error(
-        'Canvas context unavailable'
-      );
-    }
-
+    const ctx = canvas.getContext('2d')!;
 
     let W = 0;
     let H = 0;
@@ -601,13 +614,13 @@
           2
         );
 
-      W = canvas.offsetWidth;
-      H = canvas.offsetHeight;
+      W = canvas!.offsetWidth;
+      H = canvas!.offsetHeight;
 
-      canvas.width =
+      canvas!.width =
         W * dpr;
 
-      canvas.height =
+      canvas!.height =
         H * dpr;
 
       ctx.setTransform(
@@ -694,9 +707,9 @@
        ========================= */
 
     function waveY(
-      wave,
-      x,
-      t
+      wave: { freq: number; yBase: number; speed: number; amp: number },
+      x: number,
+      t: number
     ) {
 
       const k =
@@ -805,12 +818,12 @@
        ========================= */
 
     function drawTechNode(
-      x,
-      y,
-      r,
-      shape,
-      color,
-      spin
+      x: number,
+      y: number,
+      r: number,
+      shape: string,
+      color: string,
+      spin: number
     ) {
 
       ctx.save();
@@ -1222,4 +1235,28 @@
 
   }
 
+</script>
+
+<script>
+  /* =========================
+     WORD-BY-WORD ANIMATION
+     ========================= */
+  const el = document.getElementById('heroQuote');
+  if (el) {
+    const words = Array.from(el.querySelectorAll<HTMLElement>('.hw'));
+    const STAGGER = 90, HOLD = 2500, GAP = 350;
+
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      words.forEach((w) => w.classList.add('show'));
+    } else {
+      const play = (): void => {
+        words.forEach((w, i) => setTimeout(() => w.classList.add('show'), i * STAGGER));
+        setTimeout(() => {
+          words.forEach((w) => w.classList.remove('show'));
+          setTimeout(play, GAP);
+        }, words.length * STAGGER + 200 + HOLD);
+      };
+      play();
+    }
+  }
 </script>

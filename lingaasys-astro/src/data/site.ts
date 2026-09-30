@@ -8,6 +8,7 @@ export const CONFIG: { email: string | null; linkedin: string | null; instagram:
   { email: null, linkedin: null, instagram: null, google: null };
 
 export const NAV: NavItem[] = [
+  { id: 'home', label: 'Home', href: '/' },
   { id: 'about', label: 'About', href: '/about' },
   { id: 'culture', label: 'Culture', href: '/culture' }, { id: 'technologies', label: 'Technologies', href: '/technologies' },
   { id: 'industries', label: 'Industries', href: '/industries' }, { id: 'careers', label: 'Careers', href: '/careers' },

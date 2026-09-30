@@ -3,8 +3,28 @@ import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Chatbot from "../../components/Chatbot.astro";
 import Footer from "../../components/Footer.astro";
----
+import { supabase } from "../../lib/supabase";
 
+interface Job {
+  job_id: string;
+  job_type: string;
+  job_description: string;
+  job_location: string | null;
+  experience: string | null;
+  qualifications: string[] | null;
+  work_mode: string | null;
+  responsibilities: string[] | null;
+  skills: string[] | null;
+  created_at: string;
+}
+
+// Fetch Internship jobs from Supabase at request time (server-side only)
+const { data: jobs, error } = await supabase
+  .from("jobs")
+  .select("job_id, job_type, job_description, job_location, experience, qualifications, work_mode, responsibilities, skills, created_at")
+  .eq("job_type", "Intern")
+  .order("created_at", { ascending: false });
+---
 <Layout title="Internship Opportunities — Lingaasys">
 
   <Header current="careers" />
@@ -13,198 +33,97 @@ import Footer from "../../components/Footer.astro";
 
     <section class="page-hero">
       <div class="wrap">
-
-        <a href="/careers" class="back-link">
-          ← Back to Careers
-        </a>
-
+        <a href="/careers" class="back-link">← Back to Careers</a>
         <span class="eyebrow">INTERNSHIP</span>
-
         <h1>Internship<br />Opportunities</h1>
-
-        <p>
-          Explore internship opportunities at Lingaasys and
-          gain practical experience by working on real projects.
-        </p>
-
+        <p>Explore internship opportunities at Lingaasys and gain practical experience by working on real projects.</p>
       </div>
     </section>
 
     <section class="roles-section">
       <div class="wrap">
-
         <div class="section-heading">
           <span class="eyebrow">OPEN ROLES</span>
           <h2>Available Opportunities</h2>
         </div>
 
-        <!-- ROLE 01 -->
-        <article class="role-card">
+        {error && (
+          <p class="error-message">Something went wrong. Please try again later.</p>
+        )}
 
-          <div class="role-content">
+        {!error && (!jobs || jobs.length === 0) && (
+          <p class="no-jobs">No current openings available.</p>
+        )}
 
-            <span class="role-category">AI / ML</span>
-
-            <h3>AI / ML Intern</h3>
-
-            <p>
-              Work on AI and machine learning projects,
-              explore modern AI technologies, and gain
-              hands-on experience with real-world systems.
-            </p>
-
-          </div>
-
-          <button class="apply-btn" type="button">
-            Apply Now
-            <span>↗</span>
-          </button>
-
-        </article>
-
-        <!-- APPLICATION -->
-        <section class="resume-section" hidden>
-
-          <div class="application-heading">
-
-            <span class="eyebrow">APPLICATION</span>
-
-            <h2>Apply for AI / ML Intern</h2>
-
-            <p>
-              Upload your latest resume to continue with your application.
-            </p>
-
-          </div>
-
-          <!-- RESUME UPLOAD -->
-
-          <div class="upload-box">
-
-            <label class="resume-upload">
-
-              <input
-                type="file"
-                class="resume-input"
-                accept=".pdf,.docx"
-              />
-
-              <div class="upload-content">
-
-                <strong>Choose your resume</strong>
-
-                <span>PDF or DOCX</span>
-
-                <span class="browse-btn">
-                  Browse
-                </span>
-
-              </div>
-
-            </label>
-
-            <p class="upload-status"></p>
-
-          </div>
-
-          <!-- APPLICATION DETAILS -->
-
-          <div class="application-details">
-
-            <div class="details-heading">
-              <span class="eyebrow">APPLICATION DETAILS</span>
+        {(jobs || []).map((job: Job) => (
+          <article class="role-card">
+            <div class="role-content">
+              <span class="role-category">{job.job_type}</span>
+              <h3>{job.job_description}</h3>
+              {job.job_location && <p class="short-description">{job.job_location}</p>}
             </div>
 
-            <div class="form-grid">
-
-              <div class="form-field">
-                <label for="intern-name">
-                  Full Name
-                </label>
-
-                <input
-                  id="intern-name"
-                  type="text"
-                  placeholder="Your full name"
-                />
-              </div>
-
-              <div class="form-field">
-                <label for="intern-email">
-                  Email
-                </label>
-
-                <input
-                  id="intern-email"
-                  type="email"
-                  placeholder="your@email.com"
-                />
-              </div>
-
-              <div class="form-field">
-                <label for="intern-phone">
-                  Phone
-                </label>
-
-                <input
-                  id="intern-phone"
-                  type="tel"
-                  placeholder="Your phone number"
-                />
-              </div>
-
-              <div class="form-field">
-                <label for="intern-role">
-                  Applying For
-                </label>
-
-                <input
-                  id="intern-role"
-                  type="text"
-                  value="AI / ML Intern"
-                  readonly
-                />
-              </div>
-
-              <div class="form-field">
-                <label for="intern-linkedin">
-                  LinkedIn
-                </label>
-
-                <input
-                  id="intern-linkedin"
-                  type="url"
-                  placeholder="LinkedIn profile URL"
-                />
-              </div>
-
-              <div class="form-field">
-                <label for="intern-portfolio">
-                  Portfolio
-                </label>
-
-                <input
-                  id="intern-portfolio"
-                  type="url"
-                  placeholder="Portfolio / GitHub URL"
-                />
-              </div>
-
-            </div>
-
-            <!-- SUBMIT -->
-
-            <button class="submit-btn" type="button">
-              Submit Application
-              <span>↗</span>
+            <button class="apply-btn" type="button" data-apply={`apply-${job.job_id}`}>
+              Apply Now <span>↗</span>
             </button>
 
-            <p class="submit-message"></p>
+            <div class="resume-section" id={`apply-${job.job_id}`} hidden>
+              <div class="application-heading">
+                <span class="eyebrow">APPLICATION</span>
+                <h2>Apply for {job.job_description}</h2>
+                <p>Upload your latest resume to continue with your application.</p>
+              </div>
 
-          </div>
+              <div class="upload-box">
+                <label class="resume-upload">
+                  <input type="file" class="resume-input" accept=".pdf,.docx" />
+                  <div class="upload-content">
+                    <strong>Choose your resume</strong>
+                    <span>PDF or DOCX</span>
+                    <span class="browse-btn">Browse</span>
+                  </div>
+                </label>
+                <p class="upload-status"></p>
+              </div>
 
-        </section>
+              <div class="application-details">
+                <div class="details-heading">
+                  <span class="eyebrow">APPLICATION DETAILS</span>
+                </div>
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label for={`intern-name-${job.job_id}`}>Full Name</label>
+                    <input id={`intern-name-${job.job_id}`} type="text" placeholder="Your full name" />
+                  </div>
+                  <div class="form-field">
+                    <label for={`intern-email-${job.job_id}`}>Email</label>
+                    <input id={`intern-email-${job.job_id}`} type="email" placeholder="your@email.com" />
+                  </div>
+                  <div class="form-field">
+                    <label for={`intern-phone-${job.job_id}`}>Phone</label>
+                    <input id={`intern-phone-${job.job_id}`} type="tel" placeholder="Your phone number" />
+                  </div>
+                  <div class="form-field">
+                    <label for={`intern-role-${job.job_id}`}>Applying For</label>
+                    <input id={`intern-role-${job.job_id}`} type="text" value={job.job_description} readonly />
+                  </div>
+                  <div class="form-field">
+                    <label for={`intern-linkedin-${job.job_id}`}>LinkedIn</label>
+                    <input id={`intern-linkedin-${job.job_id}`} type="url" placeholder="LinkedIn profile URL" />
+                  </div>
+                  <div class="form-field">
+                    <label for={`intern-portfolio-${job.job_id}`}>Portfolio</label>
+                    <input id={`intern-portfolio-${job.job_id}`} type="url" placeholder="Portfolio / GitHub URL" />
+                  </div>
+                </div>
+                <input type="hidden" name="job_id" value={job.job_id} />
 
+                <button class="submit-btn" type="button">Submit Application <span>↗</span></button>
+                <p class="submit-message"></p>
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
 
@@ -212,705 +131,195 @@ import Footer from "../../components/Footer.astro";
 
   <Chatbot />
   <Footer />
-
 </Layout>
 
 <script>
-
-  const applyButton =
-    document.querySelector(".apply-btn");
-
-  const resumeSection =
-    document.querySelector(".resume-section");
-
-  const resumeInput =
-    document.querySelector(".resume-input");
-
-  const uploadStatus =
-    document.querySelector(".upload-status");
-
-  const nameInput =
-    document.querySelector("#intern-name");
-
-  const emailInput =
-    document.querySelector("#intern-email");
-
-  const phoneInput =
-    document.querySelector("#intern-phone");
-
-  const roleInput =
-    document.querySelector("#intern-role");
-
-  const linkedinInput =
-    document.querySelector("#intern-linkedin");
-
-  const portfolioInput =
-    document.querySelector("#intern-portfolio");
-
-  const submitButton =
-    document.querySelector(".submit-btn");
-
-  const submitMessage =
-    document.querySelector(".submit-message");
-
-
-  // OPEN APPLICATION
-
-  applyButton?.addEventListener("click", () => {
-
-    if (!resumeSection) return;
-
-    resumeSection.hidden = false;
-
-    resumeSection.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
+  // APPLY BUTTON → TOGGLE RESUME SECTION
+  document.querySelectorAll('.apply-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+      const target = button.getAttribute('data-apply');
+      const resumeSection = document.getElementById(target || '');
+      if (!resumeSection) return;
+      resumeSection.hidden = false;
+      resumeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-
   });
-
 
   // RESUME UPLOAD + AUTO FILL
+  document.querySelectorAll('.resume-input').forEach((input) => {
+    input.addEventListener('change', async () => {
+      const resumeSection = input.closest('.resume-section');
+      if (!resumeSection) return;
+      const file = (input as HTMLInputElement).files?.[0];
+      const uploadStatus = resumeSection.querySelector('.upload-status');
 
-  resumeInput?.addEventListener("change", async () => {
-
-    const file =
-      resumeInput.files?.[0];
-
-    if (!file) return;
-
-
-    uploadStatus!.textContent =
-      "Reading resume...";
-
-    uploadStatus!.className =
-      "upload-status";
-
-
-    const formData =
-      new FormData();
-
-    formData.append(
-      "resume",
-      file
-    );
-
-
-    try {
-
-      const response =
-        await fetch("/api/parse-resume", {
-          method: "POST",
-          body: formData
-        });
-
-
-      const data =
-        await response.json();
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          data.error ||
-          "Failed to read resume"
-        );
-
+      if (!file) {
+        if (uploadStatus) { uploadStatus.textContent = ''; uploadStatus.className = 'upload-status'; }
+        return;
       }
 
+      if (uploadStatus) { uploadStatus.textContent = 'Reading resume...'; uploadStatus.className = 'upload-status'; }
 
-      // AUTO-FILL DETAILS
+      const formData = new FormData();
+      formData.append('resume', file);
 
-      if (nameInput) {
-        nameInput.value =
-          data.name || "";
+      try {
+        const response = await fetch('/api/parse-resume', { method: 'POST', body: formData });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Failed to read resume');
+
+        const nameInput = resumeSection.querySelector<HTMLInputElement>('input[id$="-name"]');
+        const emailInput = resumeSection.querySelector<HTMLInputElement>('input[id$="-email"]');
+        const phoneInput = resumeSection.querySelector<HTMLInputElement>('input[id$="-phone"]');
+        const linkedinInput = resumeSection.querySelector<HTMLInputElement>('input[id$="-linkedin"]');
+        const portfolioInput = resumeSection.querySelector<HTMLInputElement>('input[id$="-portfolio"]');
+
+        if (nameInput) nameInput.value = data.name || '';
+        if (emailInput) emailInput.value = data.email || '';
+        if (phoneInput) phoneInput.value = data.phone || '';
+        if (linkedinInput) linkedinInput.value = data.linkedin || '';
+        if (portfolioInput) portfolioInput.value = data.portfolio || '';
+
+        if (uploadStatus) { uploadStatus.textContent = `✓ ${file.name} — Resume details detected`; uploadStatus.className = 'upload-status success'; }
+      } catch (error) {
+        console.error('Resume parsing failed:', error);
+        if (uploadStatus) { uploadStatus.textContent = error instanceof Error ? error.message : 'Failed to read resume.'; uploadStatus.className = 'upload-status error'; }
       }
-
-      if (emailInput) {
-        emailInput.value =
-          data.email || "";
-      }
-
-      if (phoneInput) {
-        phoneInput.value =
-          data.phone || "";
-      }
-
-      if (linkedinInput) {
-        linkedinInput.value =
-          data.linkedin || "";
-      }
-
-      if (portfolioInput) {
-        portfolioInput.value =
-          data.portfolio || "";
-      }
-
-
-      uploadStatus!.textContent =
-        `✓ ${file.name} — Resume details detected`;
-
-      uploadStatus!.className =
-        "upload-status success";
-
-
-    } catch (error) {
-
-      console.error(
-        "Resume parsing failed:",
-        error
-      );
-
-      uploadStatus!.textContent =
-        error instanceof Error
-          ? error.message
-          : "Failed to read resume.";
-
-      uploadStatus!.className =
-        "upload-status error";
-
-    }
-
+    });
   });
 
+  // SUBMIT APPLICATION → BFF
+  document.querySelectorAll('.submit-btn').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const resumeSection = button.closest('.resume-section');
+      if (!resumeSection) return;
 
-  // SUBMIT APPLICATION
+      const resumeInput = resumeSection.querySelector<HTMLInputElement>('.resume-input');
+      const file = resumeInput?.files?.[0];
 
-  submitButton?.addEventListener("click", async () => {
+      const nameInput = resumeSection.querySelector<HTMLInputElement>('input[id$="-name"]');
+      const emailInput = resumeSection.querySelector<HTMLInputElement>('input[id$="-email"]');
+      const phoneInput = resumeSection.querySelector<HTMLInputElement>('input[id$="-phone"]');
+      const roleInput = resumeSection.querySelector<HTMLInputElement>('input[id$="-role"]');
+      const linkedinInput = resumeSection.querySelector<HTMLInputElement>('input[id$="-linkedin"]');
+      const portfolioInput = resumeSection.querySelector<HTMLInputElement>('input[id$="-portfolio"]');
+      const jobIdInput = resumeSection.querySelector<HTMLInputElement>('input[name="job_id"]');
+      const message = resumeSection.querySelector('.submit-message');
 
-    const file =
-      resumeInput?.files?.[0];
-
-
-    // RESUME REQUIRED
-
-    if (!file) {
-
-      submitMessage!.textContent =
-        "Please upload your resume.";
-
-      submitMessage!.className =
-        "submit-message error";
-
-      return;
-
-    }
-
-
-    // REQUIRED DETAILS
-
-    if (
-      !nameInput?.value.trim() ||
-      !emailInput?.value.trim() ||
-      !roleInput?.value.trim()
-    ) {
-
-      submitMessage!.textContent =
-        "Please fill in the required details.";
-
-      submitMessage!.className =
-        "submit-message error";
-
-      return;
-
-    }
-
-
-    // FORM DATA
-
-    const formData =
-      new FormData();
-
-    formData.append(
-      "resume",
-      file
-    );
-
-    formData.append(
-      "name",
-      nameInput.value.trim()
-    );
-
-    formData.append(
-      "email",
-      emailInput.value.trim()
-    );
-
-    formData.append(
-      "phone",
-      phoneInput?.value.trim() || ""
-    );
-
-    formData.append(
-      "role",
-      roleInput.value.trim()
-    );
-
-    formData.append(
-      "linkedin",
-      linkedinInput?.value.trim() || ""
-    );
-
-    formData.append(
-      "portfolio",
-      portfolioInput?.value.trim() || ""
-    );
-
-
-    const originalText =
-      submitButton.innerHTML;
-
-
-    submitButton.disabled = true;
-
-    submitButton.innerHTML =
-      "Submitting...";
-
-
-    submitMessage!.textContent =
-      "";
-
-    submitMessage!.className =
-      "submit-message";
-
-
-    try {
-
-      const response =
-        await fetch("/api/apply", {
-          method: "POST",
-          body: formData
-        });
-
-
-      const data =
-        await response.json();
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          data.error ||
-          "Application submission failed"
-        );
-
+      if (!file) {
+        if (message) { message.textContent = 'Please upload your resume.'; message.className = 'submit-message error'; }
+        return;
       }
 
+      if (!nameInput?.value.trim() || !emailInput?.value.trim() || !roleInput?.value.trim()) {
+        if (message) { message.textContent = 'Please fill in the required details.'; message.className = 'submit-message error'; }
+        return;
+      }
 
-      submitMessage!.textContent =
-        "✓ Application submitted successfully.";
+      const formData = new FormData();
+      formData.append('resume', file);
+      formData.append('name', (nameInput as HTMLInputElement).value.trim());
+      formData.append('email', (emailInput as HTMLInputElement).value.trim());
+      formData.append('phone', phoneInput?.value.trim() || '');
+      formData.append('role', (roleInput as HTMLInputElement).value.trim());
+      formData.append('linkedin', linkedinInput?.value.trim() || '');
+      formData.append('portfolio', portfolioInput?.value.trim() || '');
+      if (jobIdInput?.value) formData.append('job_id', jobIdInput.value);
 
-      submitMessage!.className =
-        "submit-message success";
+      const submitBtn = button;
+      const originalText = submitBtn.innerHTML;
+      (submitBtn as HTMLButtonElement).disabled = true;
+      submitBtn.innerHTML = 'Submitting...';
+      if (message) message.textContent = '';
 
+      try {
+        const response = await fetch('/api/apply', { method: 'POST', body: formData });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Application submission failed');
 
-      submitButton.innerHTML =
-        "Application Submitted ✓";
-
-      submitButton.disabled = true;
-
-
-    } catch (error) {
-
-      console.error(
-        "Application submission failed:",
-        error
-      );
-
-
-      submitMessage!.textContent =
-        error instanceof Error
-          ? error.message
-          : "Something went wrong. Please try again.";
-
-      submitMessage!.className =
-        "submit-message error";
-
-
-      submitButton.disabled = false;
-
-      submitButton.innerHTML =
-        originalText;
-
-    }
-
+        if (message) { message.textContent = '✓ Application submitted successfully.'; message.className = 'submit-message success'; }
+        submitBtn.innerHTML = 'Application Submitted ✓';
+        (submitBtn as HTMLButtonElement).disabled = true;
+      } catch (error) {
+        if (message) {
+          message.textContent = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+          message.className = 'submit-message error';
+        }
+        (submitBtn as HTMLButtonElement).disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
+    });
   });
-
 </script>
 
 <style>
-
-  .internship-page {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .wrap {
-    width: min(1180px, 86vw);
-    margin: 0 auto;
-  }
-
-  .page-hero {
-    padding: 70px 0 110px;
-    background: #f5f5f3;
-  }
-
-  .back-link {
-    display: inline-block;
-    margin-bottom: 75px;
-    color: #666;
-    text-decoration: none;
-    font-size: 13px;
-  }
-
-  .back-link:hover {
-    color: #f26a21;
-  }
-
-  .eyebrow {
-    color: #f26a21;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.18em;
-  }
-
-  .page-hero h1 {
-    margin: 18px 0 28px;
-    color: #171717;
-    font-size: clamp(58px, 8vw, 105px);
-    line-height: 0.9;
-    letter-spacing: -0.06em;
-  }
-
-  .page-hero p {
-    max-width: 600px;
-    margin: 0;
-    color: #707070;
-    font-size: 16px;
-    line-height: 1.8;
-  }
-
-  .roles-section {
-    padding: 110px 0 140px;
-    background: #fff;
-  }
-
-  .section-heading {
-    margin-bottom: 55px;
-  }
-
-  .section-heading h2 {
-    margin: 15px 0 0;
-    color: #171717;
-    font-size: clamp(42px, 5vw, 68px);
-    line-height: 0.95;
-    letter-spacing: -0.05em;
-  }
-
-  .role-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-
-    padding: 38px 0;
-
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-
-    transition: border-color 0.25s ease;
-  }
-
-  .role-card:hover {
-    border-color: #f26a21;
-  }
-
-  .role-category {
-    color: #f26a21;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.16em;
-  }
-
-  .role-content h3 {
-    margin: 10px 0 12px;
-    color: #171717;
-    font-size: 30px;
-    line-height: 1.2;
-  }
-
-  .role-content p {
-    max-width: 650px;
-    margin: 0;
-    color: #707070;
-    font-size: 14px;
-    line-height: 1.75;
-  }
-
-  .apply-btn {
-    flex-shrink: 0;
-
-    display: inline-flex;
-    align-items: center;
-    gap: 25px;
-
-    padding: 14px 20px;
-
-    background: #f26a21;
-    border: 1px solid #f26a21;
-
-    color: #fff;
-
-    font-size: 12px;
-    font-weight: 750;
-
-    cursor: pointer;
-
-    transition:
-      background 0.25s ease,
-      border-color 0.25s ease;
-  }
-
-  .apply-btn span {
-    font-size: 17px;
-    font-weight: 400;
-  }
-
-  .apply-btn:hover {
-    background: #171717;
-    border-color: #171717;
-  }
-
-
-  /* APPLICATION */
-
-  .resume-section {
-    margin-top: 90px;
-    padding: 65px;
-    background: #f5f5f3;
-    border: 1px solid #e2e2e2;
-  }
-
-  .application-heading h2 {
-    margin: 14px 0 12px;
-    color: #171717;
-    font-size: clamp(32px, 4vw, 52px);
-    letter-spacing: -0.04em;
-  }
-
-  .application-heading p {
-    margin: 0 0 40px;
-    color: #707070;
-    font-size: 14px;
-    line-height: 1.7;
-  }
-
-  .upload-box {
-    margin-bottom: 55px;
-  }
-
-  .resume-upload {
-    display: block;
-    padding: 35px;
-    border: 1px dashed #bbb;
-    background: #fff;
-    cursor: pointer;
-  }
-
-  .resume-upload input {
-    display: none;
-  }
-
-  .upload-content {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    flex-wrap: wrap;
-  }
-
-  .upload-content strong {
-    color: #171717;
-    font-size: 14px;
-  }
-
-  .upload-content span {
-    color: #888;
-    font-size: 12px;
-  }
-
-  .browse-btn {
-    margin-left: auto;
-    padding: 10px 16px;
-    background: #171717;
-    color: #fff !important;
-    font-size: 11px !important;
-    font-weight: 700;
-  }
-
-  .upload-status {
-    margin: 12px 0 0;
-    font-size: 12px;
-    color: #707070;
-  }
-
-  .upload-status.success {
-    color: #2f7d32;
-  }
-
-  .upload-status.error {
-    color: #c62828;
-  }
-
-  .application-details {
-    padding-top: 40px;
-    border-top: 1px solid #ddd;
-  }
-
-  .details-heading {
-    margin-bottom: 30px;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-  }
-
-  .form-field {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-  }
-
-  .form-field label {
-    color: #444;
-    font-size: 11px;
-    font-weight: 700;
-  }
-
-  .form-field input {
-    width: 100%;
-    box-sizing: border-box;
-
-    padding: 14px 15px;
-
-    border: 1px solid #d5d5d5;
-    background: #fff;
-
-    color: #171717;
-    font-family: inherit;
-    font-size: 13px;
-
-    outline: none;
-  }
-
-  .form-field input:focus {
-    border-color: #f26a21;
-  }
-
-  .form-field input[readonly] {
-    background: #eeeeec;
-    color: #666;
-  }
-
-
-  /* SUBMIT */
-
-  .submit-btn {
-    margin-top: 35px;
-
-    display: inline-flex;
-    align-items: center;
-    gap: 25px;
-
-    padding: 14px 20px;
-
-    background: #f26a21;
-    border: 1px solid #f26a21;
-
-    color: #fff;
-
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 750;
-
-    cursor: pointer;
-
-    transition:
-      background 0.25s ease,
-      border-color 0.25s ease,
-      opacity 0.25s ease;
-  }
-
-  .submit-btn span {
-    font-size: 17px;
-    font-weight: 400;
-  }
-
-  .submit-btn:hover:not(:disabled) {
-    background: #171717;
-    border-color: #171717;
-  }
-
-  .submit-btn:disabled {
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
-
-  .submit-message {
-    margin: 15px 0 0;
-    font-size: 12px;
-    min-height: 18px;
-  }
-
-  .submit-message.success {
-    color: #2f7d32;
-  }
-
-  .submit-message.error {
-    color: #c62828;
-  }
-
+  .internship-page { width: 100%; overflow: hidden; }
+  .wrap { width: min(1180px, 86vw); margin: 0 auto; }
+  .page-hero { padding: 70px 0 110px; background: #f5f5f3; }
+  .back-link { display: inline-block; margin-bottom: 75px; color: #666; text-decoration: none; font-size: 13px; }
+  .back-link:hover { color: #f26a21; }
+  .eyebrow { color: #f26a21; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; }
+  .page-hero h1 { margin: 18px 0 28px; color: #171717; font-size: clamp(58px, 8vw, 105px); line-height: 0.9; letter-spacing: -0.06em; }
+  .page-hero p { max-width: 600px; margin: 0; color: #707070; font-size: 16px; line-height: 1.8; }
+
+  .roles-section { padding: 110px 0 140px; background: #fff; }
+  .section-heading { margin-bottom: 55px; }
+  .section-heading h2 { margin: 15px 0 0; color: #171717; font-size: clamp(42px, 5vw, 68px); line-height: 0.95; letter-spacing: -0.05em; }
+
+  .role-card { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 38px 0; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; transition: border-color 0.25s ease; }
+  .role-card:hover { border-color: #f26a21; }
+  .role-content h3 { margin: 10px 0 12px; color: #171717; font-size: 30px; line-height: 1.2; }
+  .role-content p { max-width: 650px; margin: 0; color: #707070; font-size: 14px; line-height: 1.75; }
+  .role-category { color: #f26a21; font-size: 10px; font-weight: 800; letter-spacing: 0.16em; }
+
+  .apply-btn { flex-shrink: 0; display: inline-flex; align-items: center; gap: 25px; padding: 14px 20px; background: #f26a21; border: 1px solid #f26a21; color: #fff; font-size: 12px; font-weight: 750; cursor: pointer; transition: background 0.25s ease, border-color 0.25s ease; }
+  .apply-btn:hover { background: #171717; border-color: #171717; }
+  .apply-btn span { font-size: 17px; font-weight: 400; }
+
+  .resume-section { margin-top: 90px; padding: 65px; background: #f5f5f3; border: 1px solid #e2e2e2; }
+  .application-heading h2 { margin: 14px 0 12px; color: #171717; font-size: clamp(32px, 4vw, 52px); letter-spacing: -0.04em; }
+  .application-heading p { margin: 0 0 40px; color: #707070; font-size: 14px; line-height: 1.7; }
+
+  .upload-box { margin-bottom: 55px; }
+  .resume-upload { display: block; padding: 35px; border: 1px dashed #bbb; background: #fff; cursor: pointer; }
+  .resume-upload input { display: none; }
+  .upload-content { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .upload-content strong { color: #171717; font-size: 14px; }
+  .upload-content span { color: #888; font-size: 12px; }
+  .browse-btn { margin-left: auto; padding: 10px 16px; background: #171717; color: #fff !important; font-size: 11px !important; font-weight: 700; }
+  .upload-status { margin: 12px 0 0; font-size: 12px; color: #707070; }
+  .upload-status.success { color: #2f7d32; }
+  .upload-status.error { color: #c62828; }
+
+  .application-details { padding-top: 40px; border-top: 1px solid #ddd; }
+  .details-heading { margin-bottom: 30px; }
+  .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+  .form-field { display: flex; flex-direction: column; gap: 9px; }
+  .form-field label { color: #444; font-size: 11px; font-weight: 700; }
+  .form-field input { width: 100%; box-sizing: border-box; padding: 14px 15px; border: 1px solid #d5d5d5; background: #fff; color: #171717; font-family: inherit; font-size: 13px; outline: none; }
+  .form-field input:focus { border-color: #f26a21; }
+  .form-field input[readonly] { background: #eeeeec; color: #666; }
+
+  .submit-btn { margin-top: 35px; display: inline-flex; align-items: center; gap: 25px; padding: 14px 20px; background: #f26a21; border: 1px solid #f26a21; color: #fff; font-family: inherit; font-size: 12px; font-weight: 750; cursor: pointer; transition: background 0.25s ease, border-color 0.25s ease, opacity 0.25s ease; }
+  .submit-btn:hover:not(:disabled) { background: #171717; border-color: #171717; }
+  .submit-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+  .submit-btn span { font-size: 17px; font-weight: 400; }
+  .submit-message { margin: 15px 0 0; font-size: 12px; min-height: 18px; }
+  .submit-message.success { color: #2f7d32; }
+  .submit-message.error { color: #c62828; }
+
+  .error-message { color: #c0392b; font-size: 16px; margin-bottom: 20px; }
+  .no-jobs { color: #707070; font-size: 18px; margin: 40px 0; }
 
   @media (max-width: 700px) {
-
-    .wrap {
-      width: calc(100% - 40px);
-    }
-
-    .page-hero {
-      padding: 55px 0 85px;
-    }
-
-    .back-link {
-      margin-bottom: 55px;
-    }
-
-    .roles-section {
-      padding: 80px 0 100px;
-    }
-
-    .role-card {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .apply-btn {
-      margin-top: 10px;
-    }
-
-    .resume-section {
-      padding: 30px 22px;
-    }
-
-    .form-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .browse-btn {
-      margin-left: 0;
-    }
-
+    .wrap { width: calc(100% - 40px); }
+    .page-hero { padding: 55px 0 85px; }
+    .back-link { margin-bottom: 55px; }
+    .roles-section { padding: 80px 0 100px; }
+    .role-card { flex-direction: column; align-items: flex-start; }
+    .apply-btn { margin-top: 10px; }
+    .resume-section { padding: 30px 22px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .browse-btn { margin-left: 0; }
   }
-
 </style>

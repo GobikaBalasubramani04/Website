@@ -2,6 +2,4 @@
 interface Props { class?: string; decorative?: boolean }
 const { class: cls = 'mark', decorative = false } = Astro.props;
 ---
-<svg class={cls} viewBox="0 0 40 40" {...(decorative ? { 'aria-hidden': 'true' } : { role: 'img', 'aria-label': 'Lingaasys logo' })}>
-  <rect width="40" height="40" fill="#F26522" /><path d="M11 8v24h18v-6H17V8z" fill="#111" />
-</svg>
+<img src="/favicon.svg" alt={decorative ? '' : 'Lingaasys logo'} class={cls} {...(decorative ? { 'aria-hidden': 'true' } : { role: 'img' })} />

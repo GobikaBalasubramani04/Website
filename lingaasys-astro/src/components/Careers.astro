@@ -1,33 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
 import CareersHero from "../components/careers/CareersHero.astro";
 import CareerPaths from "../components/careers/CareerPaths.astro";
-import Chatbot from "../components/Chatbot.astro";
-import Footer from "../components/Footer.astro";
 ---
 
-<Layout title="Careers — Lingaasys">
+<CareersHero />
 
-  <Header current="careers" />
-
-  <main class="careers-page">
-
-    <CareersHero />
-
-    <CareerPaths />
-
-  </main>
-
-  <Chatbot />
-
-  <Footer />
-
-</Layout>
-
-<style>
-  .careers-page {
-    width: 100%;
-    overflow: hidden;
-  }
-</style>
+<CareerPaths />

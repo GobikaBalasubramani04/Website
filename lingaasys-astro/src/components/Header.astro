@@ -1,12 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import { NAV } from '../data/site';
-
-interface Props {
-  current?: string;
-}
-
-const { current = '' } = Astro.props;
+const { current } = Astro.props;
 ---
 
 <a class="skip" href="#main">Skip to content</a>
@@ -14,9 +9,8 @@ const { current = '' } = Astro.props;
 <header>
   <div class="wrap nav">
 
-    <a class="logo" href="/" aria-label="Lingaasys home">
+    <a class="logo" href="/" aria-label="Home">
       <Logo decorative />
-      Lingaasys
     </a>
 
     <button
@@ -32,13 +26,9 @@ const { current = '' } = Astro.props;
 
     <ul class="links" id="nav">
       {
-        NAV.map((n) => (
+        NAV.filter((n) => n.id !== 'home').map((n) => (
           <li>
-            <a
-              href={n.href}
-              aria-current={current === n.id ? 'page' : undefined}
-              class:list={{ on: current === n.id }}
-            >
+            <a href={n.href} class={current === n.id ? 'on' : ''}>
               {n.label}
             </a>
           </li>
